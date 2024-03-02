@@ -1,4 +1,6 @@
-#[derive(Clone)]
+use chrono::prelude::*;
+
+#[derive(Clone, PartialEq, PartialOrd)]
 pub enum Mes {
     Janeiro,
     Fevereiro,
@@ -17,36 +19,30 @@ pub enum Mes {
 
 #[derive(Clone)]
 pub struct DataHora {
-    ano: u32,
-    mes: Mes,
-    dia: u32,
-    hora: u32,
-    minuto: u32,
+    pub ano: u32,
+    pub mes: Mes,
+    pub dia: u32,
+    pub hora: u32,
+
 }
 
 
 impl DataHora {
-    pub fn new(ano: u32, mes: Mes, dia: u32, hora: u32, minuto: u32) -> Self {
-        let temp: DataHora = DataHora {
+    pub fn new(ano: u32, mes: Mes, dia: u32, hora: u32) -> Self {
+        let obj: DataHora = DataHora {
             ano,
             mes,
             dia,
             hora,
-            minuto,
         };
-        temp.clone().validar_data();
-        temp
+        obj.validar_data();
+        obj.validar_espaco_tempo_continuo();
+        obj
     }
 
-    pub fn validar_data(self) {
+    pub fn validar_data(&self) {
 
-
-
-
-
-        let mut ultimo_dia_possivel: u32 = 0;
-
-        ultimo_dia_possivel = match self.mes {
+        let ultimo_dia_possivel = match self.mes {
             Mes::Fevereiro => {
                 if self.ano % 4 == 0 && (self.ano % 100 != 0 || self.ano % 400 == 0) {
                     29
@@ -73,15 +69,33 @@ impl DataHora {
             0..=24 => {},
             _ => panic!("que horas?")
         }
-
-        match self.minuto {
-            0..=59 => {},
-            _ => panic!("minuto ta errado...")
-        }
     }
+    pub fn validar_espaco_tempo_continuo(&self) {
 
-    pub fn horario_mais_antigo(data1: DataHora, data2: DataHora) -> DataHora {
-        todo!("")
+        let localtime: DateTime<Local> = Local::now();
+        let ano = localtime.year() as u32;
+        let mes = localtime.month();
+        let dia = localtime.day();
+        let hora = localtime.hour();
+        let mesmarcado = match self.mes {
+            Mes::Janeiro => 1,
+            Mes::Fevereiro => 2,
+            Mes::Marco => 3,
+            Mes::Abril => 4,
+            Mes::Maio => 5,
+            Mes::Junho => 6,
+            Mes::Julho => 7,
+            Mes::Agosto => 8,
+            Mes::Setembro => 9,
+            Mes::Outubro => 10,
+            Mes::Novembro => 11,
+            Mes::Dezembro => 12,
+        };
+
+
+        if self.ano < ano || mesmarcado < mes || self.dia < dia || self.hora <= hora {
+            panic!("exercicio do de volta ao futuro?")
+        }
     }
 }
 
@@ -96,12 +110,8 @@ impl Usuario {
         Self { id, nome, senha }
     }
 
-
-
-    pub fn login(_nome: String, _senha: String) -> Self {
-        todo!() // validar no banco de dados
-    }
 }
+
 
 
 
