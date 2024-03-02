@@ -1,0 +1,12 @@
+/home/samuel/IdeaProjects/sa6/target/debug/deps/libcookie-b36c62c2c5e621ac.rmeta: /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/lib.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/builder.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/parse.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/jar.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/delta.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/same_site.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/expiration.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/prefix.rs
+
+/home/samuel/IdeaProjects/sa6/target/debug/deps/cookie-b36c62c2c5e621ac.d: /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/lib.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/builder.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/parse.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/jar.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/delta.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/same_site.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/expiration.rs /home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/prefix.rs
+
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/lib.rs:
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/builder.rs:
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/parse.rs:
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/jar.rs:
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/delta.rs:
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/same_site.rs:
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/expiration.rs:
+/home/samuel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cookie-0.18.0/src/prefix.rs:
