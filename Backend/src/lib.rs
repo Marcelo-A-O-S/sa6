@@ -1,7 +1,3 @@
-use chrono::{DateTime, Local};
-use std::time;
-
-
 pub struct Usuario {
     pub id: i32,
     pub nome: String,
