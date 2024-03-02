@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub enum Mes {
     Janeiro,
     Fevereiro,
@@ -13,6 +14,8 @@ pub enum Mes {
     Dezembro,
 }
 
+
+#[derive(Clone)]
 pub struct DataHora {
     ano: u32,
     mes: Mes,
@@ -21,18 +24,26 @@ pub struct DataHora {
     minuto: u32,
 }
 
+
 impl DataHora {
     pub fn new(ano: u32, mes: Mes, dia: u32, hora: u32, minuto: u32) -> Self {
-        DataHora {
+        let temp: DataHora = DataHora {
             ano,
             mes,
             dia,
             hora,
             minuto,
-        }
+        };
+        temp.clone().validar_data();
+        temp
     }
 
     pub fn validar_data(self) {
+
+
+
+
+
         let mut ultimo_dia_possivel: u32 = 0;
 
         ultimo_dia_possivel = match self.mes {
@@ -52,8 +63,25 @@ impl DataHora {
             | Mes::Dezembro => 31,
             Mes::Abril | Mes::Junho | Mes::Setembro | Mes::Novembro => 30,
             _ => panic!("alguma coisa deu errado..."),
+        };
+
+        if self.dia > ultimo_dia_possivel {
+            panic!("esse dia não existe...")
         }
 
+        match self.hora {
+            0..=24 => {},
+            _ => panic!("que horas?")
+        }
+
+        match self.minuto {
+            0..=59 => {},
+            _ => panic!("minuto ta errado...")
+        }
+    }
+
+    pub fn horario_mais_antigo(data1: DataHora, data2: DataHora) -> DataHora {
+        todo!("")
     }
 }
 
@@ -68,12 +96,21 @@ impl Usuario {
         Self { id, nome, senha }
     }
 
-/*
-    pub fn login(nome: String, senha: String) -> Self {
+
+
+    pub fn login(_nome: String, _senha: String) -> Self {
         todo!() // validar no banco de dados
     }
-    */
 }
+
+
+
+
+
+
+
+
+
 /*
 
 pub struct Horario {
