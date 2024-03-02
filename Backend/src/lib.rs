@@ -16,16 +16,13 @@ pub enum Mes {
     Dezembro,
 }
 
-
 #[derive(Clone)]
 pub struct DataHora {
     pub ano: u32,
     pub mes: Mes,
     pub dia: u32,
     pub hora: u32,
-
 }
-
 
 impl DataHora {
     pub fn new(ano: u32, mes: Mes, dia: u32, hora: u32) -> Self {
@@ -41,7 +38,6 @@ impl DataHora {
     }
 
     pub fn validar_data(&self) {
-
         let ultimo_dia_possivel = match self.mes {
             Mes::Fevereiro => {
                 if self.ano % 4 == 0 && (self.ano % 100 != 0 || self.ano % 400 == 0) {
@@ -66,12 +62,11 @@ impl DataHora {
         }
 
         match self.hora {
-            0..=24 => {},
-            _ => panic!("que horas?")
+            0..=24 => {}
+            _ => panic!("que horas?"),
         }
     }
     pub fn validar_espaco_tempo_continuo(&self) {
-
         let localtime: DateTime<Local> = Local::now();
         let ano = localtime.year() as u32;
         let mes = localtime.month();
@@ -92,7 +87,6 @@ impl DataHora {
             Mes::Dezembro => 12,
         };
 
-
         if self.ano < ano || mesmarcado < mes || self.dia < dia || self.hora <= hora {
             panic!("exercicio do de volta ao futuro?")
         }
@@ -109,17 +103,7 @@ impl Usuario {
     pub fn new(id: i32, nome: String, senha: String) -> Self {
         Self { id, nome, senha }
     }
-
 }
-
-
-
-
-
-
-
-
-
 
 /*
 
