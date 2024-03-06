@@ -13,7 +13,6 @@ mod tests {
     #[should_panic]
     fn hora_impossivel() {
         let hora_impossivel: DataHora = DataHora::new(2024, Mes::Setembro, 25, 69);
-        hora_impossivel.validar_data();
     }
 
     #[test]
@@ -45,5 +44,44 @@ mod tests {
     fn reconhece_futuro() {
         let data_futura: DataHora = DataHora::new(369420, Mes::Dezembro, 30, 23);
         assert_eq!(data_futura.data_futura(), true)
+    }
+
+    #[test]
+    #[should_panic]
+    fn agendar_no_passado_da_erro() {
+        let godoberto: Usuario =
+            Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        let data_inicio: DataHora = DataHora::new(2019, Mes::Fevereiro, 20, 5);
+        let data_fim: DataHora = DataHora::new(2019, Mes::Fevereiro, 20, 7);
+
+        let agendamento_no_passado: Agendamento =
+            Agendamento::new(godoberto, data_inicio, data_fim);
+    }
+
+    #[test]
+    fn agendar_normal() {
+        let godoberto: Usuario = Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
+        let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
+        let agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+    }
+
+    #[test]
+    #[should_panic]
+    fn agendar_mais_que_um_dia() {
+        let godoberto: Usuario = Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
+        let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 21, 7);
+        let agendamento_falho: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+    }
+
+    #[test]
+    #[should_panic]
+    fn agendar_inicio_depois_do_fim() {
+        let godoberto: Usuario = Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
+        let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
+        let agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+
     }
 }

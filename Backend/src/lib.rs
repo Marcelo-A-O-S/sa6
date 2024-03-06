@@ -97,18 +97,17 @@ pub mod backend {
     #[derive(PartialEq, Debug)]
 
     pub struct Usuario {
-        pub id: i32,
         pub nome: String,
-        pub senha: String,
+        pub cpf: String,
     }
 
     impl Usuario {
-        pub fn new(id: i32, nome: String, senha: String) -> Self {
-            Self { id, nome, senha }
+        pub fn new(nome: String, cpf: String) -> Self {
+            Self { nome, cpf }
         }
     }
-    #[derive(PartialEq, Debug)]
 
+    #[derive(PartialEq, Debug)]
     pub struct Agendamento {
         pub usuario: Usuario,
         pub horainicio: DataHora,
@@ -117,13 +116,18 @@ pub mod backend {
 
     impl Agendamento {
         pub fn new(usuario: Usuario, horainicio: DataHora, horafim: DataHora) -> Self {
-            Agendamento {
+            let temp = Agendamento {
                 usuario,
                 horainicio,
                 horafim,
-            }
+            };
+            temp.validar_inicio_e_fim();
+            temp
         }
-        pub fn validar_inicio_e_fim(self) {
+        pub fn validar_inicio_e_fim(&self) {
+            if !(self.horafim.data_futura() | self.horainicio.data_futura()) {
+                panic!("você só pode agendar um horario no futuro")
+            }
             if !(self.horafim.ano == self.horainicio.ano
                 && self.horafim.mes == self.horainicio.mes
                 && self.horafim.dia == self.horainicio.dia)
