@@ -60,7 +60,8 @@ mod tests {
 
     #[test]
     fn agendar_normal() {
-        let godoberto: Usuario = Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        let godoberto: Usuario =
+            Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
         let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
         let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
         let agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
@@ -69,7 +70,8 @@ mod tests {
     #[test]
     #[should_panic]
     fn agendar_mais_que_um_dia() {
-        let godoberto: Usuario = Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        let godoberto: Usuario =
+            Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
         let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
         let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 21, 7);
         let agendamento_falho: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
@@ -78,10 +80,10 @@ mod tests {
     #[test]
     #[should_panic]
     fn agendar_inicio_depois_do_fim() {
-        let godoberto: Usuario = Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        let godoberto: Usuario =
+            Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
         let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
         let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
         let agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
-
     }
 }
