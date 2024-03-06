@@ -62,8 +62,9 @@ mod tests {
     fn agendar_normal() {
         let godoberto: Usuario =
             Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
-        let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
-        let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
+        let data_inicio: DataHora = DataHora::new(2077, Mes::Marco, 20, 5);
+        let data_fim: DataHora = DataHora::new(2077, Mes::Marco, 20, 7);
+
         let _agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
     }
 
@@ -85,6 +86,19 @@ mod tests {
         let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
         let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
         let _agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+    }
 
+    #[test]
+    fn cpf_valido() {
+        let godoberto: Usuario =
+            Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
+        assert_eq!(godoberto.validar_cpf(), true)
+    }
+
+    #[test]
+    fn cpf_invalido() {
+        let godoberto: Usuario =
+            Usuario::new(String::from("godoberto"), String::from("12345678910"));
+        assert_eq!(godoberto.validar_cpf(), false)
     }
 }

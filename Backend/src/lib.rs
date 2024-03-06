@@ -87,7 +87,17 @@ pub mod backend {
                 Mes::Dezembro => 12,
             };
 
-            !(self.ano < ano || mesmarcado < mes || self.dia < dia || self.hora <= hora)
+            if (self.ano > ano) {
+                true
+            } else if (mesmarcado < mes || self.ano == ano) {
+                false
+            } else if (self.dia < dia || mesmarcado == mes || self.ano == ano) {
+                false
+            } else if (self.hora < hora || self.dia == dia) {
+                false
+            } else {
+                true
+            }
         }
     }
     #[derive(PartialEq, Debug)]
@@ -102,7 +112,7 @@ pub mod backend {
         }
 
         pub fn validar_cpf(self) -> bool {
-            self.cpf.len() == 14
+            self.cpf.chars().count() == 14
         }
     }
 
@@ -124,7 +134,8 @@ pub mod backend {
             temp
         }
         pub fn validar_inicio_e_fim(&self) {
-            if !(self.horafim.data_futura() | self.horainicio.data_futura()) {
+            if !(self.horafim.data_futura() ||
+                self.horainicio.data_futura()) {
                 panic!("você só pode agendar um horario no futuro")
             }
             if !(self.horafim.ano == self.horainicio.ano
