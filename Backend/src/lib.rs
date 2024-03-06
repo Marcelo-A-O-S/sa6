@@ -91,7 +91,6 @@ pub mod backend {
         }
     }
     #[derive(PartialEq, Debug)]
-
     pub struct Usuario {
         pub nome: String,
         pub cpf: String,
@@ -100,6 +99,10 @@ pub mod backend {
     impl Usuario {
         pub fn new(nome: String, cpf: String) -> Self {
             Self { nome, cpf }
+        }
+
+        pub fn validar_cpf(self) -> bool {
+            self.cpf.len() == 14
         }
     }
 
