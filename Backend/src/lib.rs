@@ -87,11 +87,7 @@ pub mod backend {
                 Mes::Dezembro => 12,
             };
 
-            if self.ano < ano || mesmarcado < mes || self.dia < dia || self.hora <= hora {
-                false
-            } else {
-                true
-            }
+            !(self.ano < ano || mesmarcado < mes || self.dia < dia || self.hora <= hora)
         }
     }
     #[derive(PartialEq, Debug)]

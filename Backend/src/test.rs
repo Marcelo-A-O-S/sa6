@@ -12,7 +12,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn hora_impossivel() {
-        let hora_impossivel: DataHora = DataHora::new(2024, Mes::Setembro, 25, 69);
+        let _hora_impossivel: DataHora = DataHora::new(2024, Mes::Setembro, 25, 69);
     }
 
     #[test]
@@ -54,7 +54,7 @@ mod tests {
         let data_inicio: DataHora = DataHora::new(2019, Mes::Fevereiro, 20, 5);
         let data_fim: DataHora = DataHora::new(2019, Mes::Fevereiro, 20, 7);
 
-        let agendamento_no_passado: Agendamento =
+        let _agendamento_no_passado: Agendamento =
             Agendamento::new(godoberto, data_inicio, data_fim);
     }
 
@@ -64,7 +64,7 @@ mod tests {
             Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
         let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
         let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
-        let agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+        let _agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
     }
 
     #[test]
@@ -74,7 +74,7 @@ mod tests {
             Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
         let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
         let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 21, 7);
-        let agendamento_falho: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+        let _agendamento_falho: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
     }
 
     #[test]
@@ -84,6 +84,7 @@ mod tests {
             Usuario::new(String::from("godoberto"), String::from("123.456.789-10"));
         let data_inicio: DataHora = DataHora::new(69420, Mes::Marco, 20, 7);
         let data_fim: DataHora = DataHora::new(69420, Mes::Marco, 20, 5);
-        let agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+        let _agendamento_normal: Agendamento = Agendamento::new(godoberto, data_inicio, data_fim);
+
     }
 }
