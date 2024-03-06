@@ -1,4 +1,5 @@
 use chrono::prelude::*;
+use std::collections::HashMap;
 
 #[derive(Clone, PartialEq, PartialOrd)]
 pub enum Mes {
@@ -54,7 +55,6 @@ impl DataHora {
             | Mes::Outubro
             | Mes::Dezembro => 31,
             Mes::Abril | Mes::Junho | Mes::Setembro | Mes::Novembro => 30,
-            _ => panic!("alguma coisa deu errado..."),
         };
 
         if self.dia > ultimo_dia_possivel {
@@ -105,28 +105,56 @@ impl Usuario {
     }
 }
 
-/*
-
-pub struct Horario {
-    pub entrada: DateTime,
-    pub saida: DateTime,
-    pub usuario: String,
-    pub status: String,
+struct Agendamento {
+    pub usuario: Usuario,
+    pub horainicio: DataHora,
+    pub horafim: DataHora,
 }
 
-impl Horario {
-    pub fn new(entrada: DateTime, saida: DateTime, usuario: String, status: String) -> Self {
-        Horario {
-            entrada,
-            saida,
+impl Agendamento {
+    pub fn new(usuario: Usuario, horainicio: DataHora, horafim: DataHora) -> Self {
+        Agendamento {
             usuario,
-            status,
+            horainicio,
+            horafim,
+        }
+    }
+    pub fn validar_inicio_e_fim(self) {
+        if !(self.horafim.ano == self.horainicio.ano
+            && self.horafim.mes == self.horainicio.mes
+            && self.horafim.dia == self.horainicio.dia)
+        {
+            panic!("o horario de inicio e fim tem que ser no mesmo dia")
+        } else if self.horafim.hora < self.horainicio.hora {
+            panic!("o horario de saida não pode ser antes do de entrada")
+        }
+    }
+}
+
+pub struct Academia {
+    pub nome: String,
+    pub horario_abertura: u32,
+    pub horario_fechamento: u32,
+    pub capacidade: u32,
+    pub horariosagendados: HashMap<DataHora, Vec<Agendamento>>,
+}
+
+impl Academia {
+    pub fn new(
+        nome: String,
+        horario_abertura: u32,
+        horario_fechamento: u32,
+        capacidade: u32,
+        horariosagendados: HashMap<DataHora, Vec<Agendamento>>,
+    ) -> Self {
+        Academia {
+            nome,
+            horario_abertura,
+            horario_fechamento,
+            capacidade,
+            horariosagendados,
         }
     }
 
-    pub fn validar_horario(self) {
 
-    }
 }
-
-*/
