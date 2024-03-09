@@ -6,29 +6,37 @@ body{
     margin: 0 auto;
     padding: 15px;
 }
-
-header{
+.col{
+    color:white;
+}
+.body{
+    background-color: rgb(34, 34, 34);
+    color: white;
+    font-family: poppinsregular;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+.navbar{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-
 #title{
     flex-direction: column;
     line-height: 10px;
 }
 
-li{
+.item_link{
     display: inline-block;
     margin: 20px;
 }
 
-a{
+.link{
     color: white;
 }
-
-a:hover{
+.link:hover{
     color: rgb(132, 14, 201);
     transition: 0.3s all;
 }
@@ -47,18 +55,19 @@ a:hover{
 h1{
     font-weight: 200;
 }
+.title{
+    font-size: 56px;
+    line-height: 10px;
+    font-family: poppinsmedium;
+}
 
-main{
+
+.main{
     display: flex;
     flex-direction: row;
     margin-top: 50px;
 }
 
-h2{
-    font-size: 56px;
-    line-height: 10px;
-    font-family: poppinsmedium;
-}
 
 span{
     color: rgb(132, 14, 201);
@@ -87,6 +96,23 @@ form [type="submit"]{
     color: white;
     font-weight: bold;
 }
+.btn-primary{
+    height: 50px;
+    width: 50%;
+    background-color: rgb(132, 14, 201);
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+}
+.btn-primary-custom {
+    background-color: rgb(132, 14, 201);
+    border-color: rgb(132, 14, 201);
+}
+
+.btn{
+    background-color: rgb(132, 14, 201);
+    color: white;
+}
 form [type="submit"]:hover{
     cursor: pointer;
 }
@@ -98,4 +124,11 @@ input{
     border-radius: 20px;
     border: none;
     font-size: 15px;
+}
+.academia-item{
+    border: 1px solid white;
+    padding:30px;
+    border-radius: 12px;
+    gap:10px;
+
 }
