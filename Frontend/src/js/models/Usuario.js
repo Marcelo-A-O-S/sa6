@@ -5,4 +5,5 @@ export class Usuario{
         this.name = _name;
         this.cpf = _cpf;
     }
+
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Ilicon-The-Circus-Strong-bear.16.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/calendario.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+  <section>
+    <div class="container">
+      <div class="calendar">
+        <div class="calendar-header">
+          <span class="month-picker" id="month-picker"> May </span>
+          <div class="year-picker" id="year-picker">
+            <span class="year-change" id="pre-year">
+              <pre>&lt;</pre>
+            </span>
+            <span id="year">2020</span>
+            <span class="year-change" id="next-year">
+              <pre>&gt;</pre>
+            </span>
+          </div>
+        </div>
+        <div class="calendar-body">
+          <div class="calendar-week-days">
+            <div>Dom</div>
+            <div>Seg</div>
+            <div>Ter</div>
+            <div>Qua</div>
+            <div>Qui</div>
+            <div>Sex</div>
+            <div>Sab</div>
+          </div>
+          <div class="calendar-days">
+          </div>
+        </div>
+        <div class="calendar-footer">
+        </div>
+        <div class="date-time-format">
+          <div class="day-text-format">HOJE</div>
+          <div class="date-time-value">
+            <div class="time-format">01:41:20</div>
+            <div class="date-format">03 - march - 2022</div>
+          </div>
+        </div>
+        <div class="month-list"></div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <h1>Cadastre o seu horário</h1>
+      <form id="cadastroForm">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" class="form-control" id="nome" placeholder="Digite o nome">
+        </div>
+        <div class="form-group">
+          <label for="horario">Horário:</label>
+          <input type="text" class="form-control" id="horario" placeholder="Digite o horário">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="concluirCadastro()">Concluído</button>
+      </form>
+    </div>
+  </section>
+<script src="../js/utils/Calendario.js"></script>
+</body>
+</html>
