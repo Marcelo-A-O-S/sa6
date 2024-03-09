@@ -1,5 +1,6 @@
 import { ApiAcademias } from "../api/ApiAcademias.js"
 
+
 async function loadAcademias(){
 
     const apiAcademias = new ApiAcademias()
@@ -13,10 +14,12 @@ async function loadAcademias(){
             <div class="academia-item">
                 <h1 >${item.NomeComercial}</h1>
                 <p>Endereço : ${item.Endereco}</p>
+                <p>Horário Abertura : <span style="color:green;">${item.HorarioAbertura}</span></p>
+                <p>Horário Fechamento : <span style="color:red;">${item.HorarioFechamento}</span></p>
                 <ul id="academy1List" class="list-group">
                 </ul>
                 <div>
-                    <button onclick="window.location.href='Academia.html?NomeComercial=${item.NomeComercial}'" class="btn btn-primary">Entrar</button>
+                    <button onclick="window.location.href='Academia.html?NomeComercial=${item.NomeComercial}'" class="btn-custom">Entrar</button>
                 </div>
             </div>
             <hr>
