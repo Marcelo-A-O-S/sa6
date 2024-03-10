@@ -5,16 +5,6 @@
     box-sizing: border-box;
 }
 
-body {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    place-items: center;
-    background: linear-gradient(to right, #9796f0, #42445A);
-    overflow: hidden;
-}
 
 .calendar {
     height: 30rem;
@@ -30,7 +20,7 @@ body {
 }
 
 .calendar-header {
-    background: #8089FE;
+    background: #8f16d0;
     display: flex;
     justify-content: space-between;
     border-radius: 7px;
@@ -49,7 +39,7 @@ body {
     grid-template-columns: repeat(7, 1fr);
     font-weight: 600;
     cursor: pointer;
-    color: rgb(104, 104, 104);
+    color: rgb(247, 240, 240);
 }
 
 .calendar-week-days div:hover {
@@ -61,7 +51,7 @@ body {
 .calendar-week-days div {
     display: grid;
     place-items: center;
-    color: #6D67CF;
+    color: #8f16d0;;
     height: 50px;
 }
 
@@ -69,7 +59,7 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 2px;
-    color: #0A0921;
+    color: #8f16d0;;
 }
 
 .calendar-days div {
@@ -88,6 +78,7 @@ body {
     padding: 5px 10px;
     border-radius: 10px;
     cursor: pointer;
+    color:white;
 }
 
 .year-picker {
@@ -103,10 +94,12 @@ body {
     place-items: center;
     margin: 0px 10px;
     cursor: pointer;
+    color:white;
 }
 
 .year-change:hover {
-    background-color: #9796f0;
+    color:#8f16d0;
+    background-color: #f5f5f8;
     transition: all .2s ease-in-out;
     transform: scale(1.12);
 }
@@ -117,7 +110,9 @@ body {
     justify-content: flex-end;
     align-items: center;
 }
-
+#year{
+    color:white;
+}
 #year:hover {
     cursor: pointer;
     transform: scale(1.2);
@@ -130,14 +125,18 @@ body {
 
 .calendar-days div:hover {
     transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-    background-color: #fbc7d4;
+    background-color: #8f16d0;
     border-radius: 20%;
-    color: #f8fbff;
+    color: #ffffff;
 }
-
+.block{
+    background-color: #ef1d0e;
+    border-radius: 20%;
+    color: #ffffff;
+}
 .calendar-days div.current-date {
-    color: #f8fbff;
-    background-color: #9796f0;
+    color: #ffffff;
+    background-color: #a600ff;;
     border-radius: 20%;
 }
 
@@ -145,8 +144,8 @@ body {
     position: relative;
     left: 0;
     top: -130px;
-    background-color: #ebebeb;
-    color: #151426;
+    background-color: #f1f1f1;
+    color: #8f16d0;
     display: grid;
     grid-template-columns: repeat(3, auto);
     gap: 5px;
@@ -167,8 +166,8 @@ body {
 }
 
 .month-list>div>div:hover {
-    background-color: #9796f0;
-    color: #f8fbff;
+    background-color: #f1f0f1;
+    color: #8f16d0;
     transform: scale(0.9);
     transition: all 0.2s ease-in-out;
 }
@@ -213,10 +212,12 @@ body {
     position: relative;
     text-align: center;
     padding-left: 5%;
+    color:#8f16d0;;
 }
 
 .time-formate {
     font-size: 1.5rem;
+    color:black;
 }
 
 .time-formate.hideTime {

@@ -4,7 +4,8 @@ export const TYPEVALIDATION = {
     EMAIL: 'email',
     TIME: 'time',
     DATE: 'date',
-    NAME: 'name'
+    NAME: 'name',
+    NUMBER: 'number'
   };
 
 export class InputValidation{
@@ -20,11 +21,21 @@ export class InputValidation{
         this.typeValidation = _typeValidation;
         this.valid = false;
     }
+    setValue(value){
+        this.inputIdDOM.value = value;
+    }
     getValue(){
         return this.inputIdDOM.value;
     }
     onChangeInput(){
+        const event = new Event("input");
         this.inputIdDOM.addEventListener("input",(e)=>{
+            console.log(e.target.value.length);
+            console.log(e.target.value)
+            console.log(e)
+            if(this.typeValidation == TYPEVALIDATION.NUMBER){
+
+            }
             if(this.typeValidation == TYPEVALIDATION.NAME){
                 if(this.verifyFieldEmpty(e)){
                     if(this.verifyName(e)){
@@ -61,9 +72,10 @@ export class InputValidation{
                 this.isValid()
             }
         })
+        this.inputIdDOM.dispatchEvent(event);
     }
     verifyFieldEmpty(e){
-        if(e.target.value == ""){
+        if(e.target.value == "" && e.target.selectionEnd == 0){
             this.sucessIdDOM.innerHTML = "";
             this.erroIdDOM.innerHTML = "Preencha o campo acima!";
             return false;
@@ -129,6 +141,13 @@ export class InputValidation{
             return false
         }else{
             return true
+        }
+    }
+    verifyNumber(e){
+        if(inputValue.search(/[a-zA-Z]/) > -1){
+            let matchCaracteres = inputValue.match(/[a-zA-Z]/);
+            this.erroIdDOM.innerHTML = `Os caracteres a seguir são inválidos: ${matchCaracteres.input}`;
+            return false
         }
     }
 }
