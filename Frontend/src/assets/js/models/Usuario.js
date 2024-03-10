@@ -1,9 +1,10 @@
 export class Usuario{
-    name;
-    cpf;
-    constructor(_name, _cpf){
-        this.name = _name;
-        this.cpf = _cpf;
+    Id;
+    nome;
+    CPF;
+    constructor(_name = "", _cpf = "", _Id =0){
+        this.nome = _name;
+        this.CPF = _cpf;
+        this.Id = _Id
     }
-
 }
