@@ -1,9 +1,9 @@
-mod test;
 pub mod backend {
     use chrono::prelude::*;
     use std::collections::HashMap;
+    use serde::{Deserialize, Serialize};
 
-    #[derive(PartialEq, Debug, Hash, Eq)]
+    #[derive(PartialEq, Debug, Hash, Eq, Clone, Deserialize, Serialize)]
     pub enum Mes {
         Janeiro,
         Fevereiro,
@@ -18,7 +18,7 @@ pub mod backend {
         Novembro,
         Dezembro,
     }
-    #[derive(PartialEq, Debug, Eq, Hash)]
+    #[derive(PartialEq, Debug, Eq, Hash, Clone, Deserialize, Serialize)]
     pub struct DataHora {
         pub ano: u32,
         pub mes: Mes,
@@ -87,20 +87,21 @@ pub mod backend {
                 Mes::Dezembro => 12,
             };
 
-            if (self.ano > ano) {
+            if self.ano > ano {
                 true
-            } else if (mesmarcado < mes || self.ano == ano) {
+            } else if mesmarcado < mes || self.ano == ano {
                 false
-            } else if (self.dia < dia || mesmarcado == mes || self.ano == ano) {
+            } else if self.dia < dia || mesmarcado == mes || self.ano == ano {
                 false
-            } else if (self.hora < hora || self.dia == dia) {
+            } else if self.hora < hora || self.dia == dia {
                 false
             } else {
                 true
             }
         }
     }
-    #[derive(PartialEq, Debug)]
+
+    #[derive(PartialEq, Debug, Clone, Deserialize, Serialize)]
     pub struct Usuario {
         pub nome: String,
         pub cpf: String,
@@ -108,15 +109,14 @@ pub mod backend {
 
     impl Usuario {
         pub fn new(nome: String, cpf: String) -> Self {
-            Self { nome, cpf }
+            user { nome, cpf }
         }
-
         pub fn validar_cpf(self) -> bool {
             self.cpf.chars().count() == 14
         }
     }
 
-    #[derive(PartialEq, Debug)]
+    #[derive(PartialEq, Debug, Clone, Deserialize, Serialize)]
     pub struct Agendamento {
         pub usuario: Usuario,
         pub horainicio: DataHora,
@@ -134,8 +134,7 @@ pub mod backend {
             temp
         }
         pub fn validar_inicio_e_fim(&self) {
-            if !(self.horafim.data_futura() ||
-                self.horainicio.data_futura()) {
+            if !(self.horafim.data_futura() || self.horainicio.data_futura()) {
                 panic!("você só pode agendar um horario no futuro")
             }
             if !(self.horafim.ano == self.horainicio.ano
