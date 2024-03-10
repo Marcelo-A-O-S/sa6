@@ -1,27 +1,32 @@
 [
     {
         "Nome":"Marcelo Augusto",
-        "Dia":"29",
-        "Horario":"17:06:00"
+        "Data":"23/03/2024",
+        "HorarioInicial":"16:00:00",
+        "HorarioFinal":"17:06:00"
     },
     {
         "Nome":"Henrique",
-        "Dia":"22",
-        "Horario":"06:30:00"
+        "Data":"22/03/2024",
+        "HorarioInicial":"06:30:00",
+        "HorarioFinal":"07:30:00"
     },
     {
         "Nome":"Gabriel",
-        "Dia":"15",
-        "Horario":"17:06:00"
+        "Data":"15/03/2024",
+        "HorarioInicial":"17:06:00",
+        "HorarioFinal":"18:06:00"
     },
     {
         "Nome":"Samuel",
-        "Dia":"20",
-        "Horario":"17:06:00"
+        "Data":"20/03/2024",
+        "HorarioInicial":"14:06:00",
+        "HorarioFinal":"15:06:00"
     },
     {
         "Nome":"Rafael",
-        "Dia":"17",
-        "Horario":"17:06:00"
+        "Data":"17/03/2024",
+        "HorarioInicial":"15:06:00",
+        "HorarioFinal":"16:06:00"
     }
 ]
