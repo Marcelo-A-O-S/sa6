@@ -20,30 +20,36 @@ export class InputValidation{
         this.typeValidation = _typeValidation;
         this.valid = false;
     }
+    getValue(){
+        return this.inputIdDOM.value;
+    }
     onChangeInput(){
         this.inputIdDOM.addEventListener("input",(e)=>{
             if(this.typeValidation == TYPEVALIDATION.NAME){
                 if(this.verifyFieldEmpty(e)){
                     if(this.verifyName(e)){
                         this.valid = true;
+                        this.isValid()
                     }
                 }
-                this.isValid()
+
             }
             if(this.typeValidation == TYPEVALIDATION.TEXT){
                 if(this.verifyFieldEmpty(e)){
                     this.valid = true;
+                    this.isValid()
                 }
-                this.isValid()
+
             }
             if(this.typeValidation == TYPEVALIDATION.CPF){
                 this.maskCPF(e)
                 if(this.verifyFieldEmpty(e)){
                     if(this.verifyValidationCpF(e)){
                         this.valid = true;
+                        this.isValid()
                     }
                 }
-                this.isValid()
+
             }
             if(this.typeValidation == TYPEVALIDATION.EMAIL){
                 this.verifyFieldEmpty(e);
@@ -117,6 +123,7 @@ export class InputValidation{
         inputValue = e.target.value;
         if(inputValue.search(/[0-9]/) > -1){
             let matchCaracteres = inputValue.match(/[0-9]/);
+            console.log(matchCaracteres)
             this.sucessIdDOM.innerHTML = "";
             this.erroIdDOM.innerHTML = `Os caracteres a seguir são inválidos: ${matchCaracteres.input}`;
             return false
