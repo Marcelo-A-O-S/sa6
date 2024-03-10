@@ -20,7 +20,7 @@
 }
 
 .calendar-header {
-    background: #8089FE;
+    background: #8f16d0;
     display: flex;
     justify-content: space-between;
     border-radius: 7px;
@@ -39,7 +39,7 @@
     grid-template-columns: repeat(7, 1fr);
     font-weight: 600;
     cursor: pointer;
-    color: rgb(104, 104, 104);
+    color: rgb(247, 240, 240);
 }
 
 .calendar-week-days div:hover {
@@ -51,7 +51,7 @@
 .calendar-week-days div {
     display: grid;
     place-items: center;
-    color: #6D67CF;
+    color: #8f16d0;;
     height: 50px;
 }
 
@@ -59,7 +59,7 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 2px;
-    color: #0A0921;
+    color: #8f16d0;;
 }
 
 .calendar-days div {
@@ -78,6 +78,7 @@
     padding: 5px 10px;
     border-radius: 10px;
     cursor: pointer;
+    color:white;
 }
 
 .year-picker {
@@ -93,10 +94,12 @@
     place-items: center;
     margin: 0px 10px;
     cursor: pointer;
+    color:white;
 }
 
 .year-change:hover {
-    background-color: #9796f0;
+    color:#8f16d0;
+    background-color: #f5f5f8;
     transition: all .2s ease-in-out;
     transform: scale(1.12);
 }
@@ -107,7 +110,9 @@
     justify-content: flex-end;
     align-items: center;
 }
-
+#year{
+    color:white;
+}
 #year:hover {
     cursor: pointer;
     transform: scale(1.2);
@@ -120,14 +125,14 @@
 
 .calendar-days div:hover {
     transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-    background-color: #fbc7d4;
+    background-color: #8f16d0;
     border-radius: 20%;
-    color: #f8fbff;
+    color: #ffffff;
 }
 
 .calendar-days div.current-date {
-    color: #f8fbff;
-    background-color: #9796f0;
+    color: #ffffff;
+    background-color: #a600ff;;
     border-radius: 20%;
 }
 
@@ -135,8 +140,8 @@
     position: relative;
     left: 0;
     top: -130px;
-    background-color: #ebebeb;
-    color: #151426;
+    background-color: #f1f1f1;
+    color: #8f16d0;
     display: grid;
     grid-template-columns: repeat(3, auto);
     gap: 5px;
@@ -157,8 +162,8 @@
 }
 
 .month-list>div>div:hover {
-    background-color: #9796f0;
-    color: #f8fbff;
+    background-color: #f1f0f1;
+    color: #8f16d0;
     transform: scale(0.9);
     transition: all 0.2s ease-in-out;
 }
@@ -203,10 +208,12 @@
     position: relative;
     text-align: center;
     padding-left: 5%;
+    color:#8f16d0;;
 }
 
 .time-formate {
     font-size: 1.5rem;
+    color:black;
 }
 
 .time-formate.hideTime {
