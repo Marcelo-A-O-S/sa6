@@ -1,7 +1,7 @@
 export class ApiAcademias{
     async getAcademias(){
         let Academias;
-        Academias = await fetch("/Frontend/src/js/data/DataAcademias.json")
+        Academias = await fetch("/Frontend/src/assets/js/data/DataAcademias.json")
         .then( (response) => {
             return response.json()
         })
