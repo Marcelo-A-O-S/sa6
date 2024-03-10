@@ -1,4 +1,4 @@
-import { ApiAcademias } from "../api/ApiAcademias"
+import { ApiAcademias } from "../../js/api/ApiAcademias"
 
 
 async function loadAcademias(){
