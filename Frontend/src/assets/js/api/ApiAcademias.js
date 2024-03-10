@@ -9,7 +9,7 @@ export class ApiAcademias{
         return Academias;
     }
     async getAcademiaByNomeComercial(nomeComercial){
-        let Academia;
+        let Academia = [];
         Academia = await fetch(`/Frontend/src/js/data/DataAcademias.json?NomeComercial=${nomeComercial}`)
         .then((response)=>{
             return response.json();
