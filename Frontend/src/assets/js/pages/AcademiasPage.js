@@ -1,6 +1,4 @@
-import { ApiAcademias } from "../../js/api/ApiAcademias"
-
-
+import { ApiAcademias } from "../../js/api/ApiAcademias.js"
 async function loadAcademias(){
 
     const apiAcademias = new ApiAcademias()
