@@ -3,7 +3,8 @@ export const TYPEVALIDATION = {
     TEXT: 'text',
     EMAIL: 'email',
     TIME: 'time',
-    DATE: 'date'
+    DATE: 'date',
+    NAME: 'name'
   };
 
 export class InputValidation{
@@ -11,29 +12,47 @@ export class InputValidation{
     erroIdDOM;
     sucessIdDOM;
     typeValidation;
+    valid;
     constructor(_inputId, _erroId, _sucessId, _typeValidation){
         this.inputIdDOM = document.getElementById(_inputId);
         this.erroIdDOM = document.getElementById(_erroId);
         this.sucessIdDOM = document.getElementById(_sucessId);
         this.typeValidation = _typeValidation;
+        this.valid = false;
     }
     onChangeInput(){
         this.inputIdDOM.addEventListener("input",(e)=>{
+            if(this.typeValidation == TYPEVALIDATION.NAME){
+                if(this.verifyFieldEmpty(e)){
+                    if(this.verifyName(e)){
+                        this.valid = true;
+                    }
+                }
+                this.isValid()
+            }
             if(this.typeValidation == TYPEVALIDATION.TEXT){
-                this.verifyFieldEmpty(e);
+                if(this.verifyFieldEmpty(e)){
+                    this.valid = true;
+                }
+                this.isValid()
             }
             if(this.typeValidation == TYPEVALIDATION.CPF){
-                console.log(e)
                 this.maskCPF(e)
-                this.verifyFieldEmpty(e);
-                this.verifyValidationCpF(e);
+                if(this.verifyFieldEmpty(e)){
+                    if(this.verifyValidationCpF(e)){
+                        this.valid = true;
+                    }
+                }
+                this.isValid()
             }
             if(this.typeValidation == TYPEVALIDATION.EMAIL){
                 this.verifyFieldEmpty(e);
+                this.isValid()
             }
             if(this.typeValidation == TYPEVALIDATION.TIME){
                 this.verifyFieldEmpty(e);
                 this.verifyTime(e);
+                this.isValid()
             }
         })
     }
@@ -41,7 +60,13 @@ export class InputValidation{
         if(e.target.value == ""){
             this.sucessIdDOM.innerHTML = "";
             this.erroIdDOM.innerHTML = "Preencha o campo acima!";
+            return false;
+        }else if(e.target.value !== ""){
+            this.sucessIdDOM.innerHTML = "";
+            this.erroIdDOM.innerHTML = "";
+            return true;
         }
+
     }
     maskCPF(e){
         if(e.target.selectionEnd == 3){
@@ -53,21 +78,50 @@ export class InputValidation{
         }
     }
     verifyValidationCpF(e){
-        const cpfRegex = /^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+$/;
-                if(cpfRegex.test(e.target.value)){
-                    console.log("CPF válido");
-                }else{
-                    this.sucessIdDOM.innerHTML = "";
-                    this.erroIdDOM.innerHTML = "CPF só utiliza caracteres numericos, corrija para prosseguir!";
-                }
+        const cpfRegex = /^[0-9]+\.[0-9]+\.[0-9]+-[0-9][0-9]$/;
+        let inputValue = "";
+        inputValue = e.target.value;
+        if(inputValue.search(/[a-zA-Z]/) > -1){
+            let matchCaracteres = inputValue.match(/[a-zA-Z]/);
+            this.erroIdDOM.innerHTML = `Os caracteres a seguir são inválidos: ${matchCaracteres.input}`;
+            return false
+        }else if(cpfRegex.test(e.target.value)){
+            console.log("CPF válido");
+            return true
+        }else{
+            this.sucessIdDOM.innerHTML = "";
+            this.erroIdDOM.innerHTML = "Formato inválido ou incompleto";
+            return false
+        }
     }
     verifyTime(e){
         const timeRegex = /^(?:[01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
-                if(timeRegex.test(e.target.value)){
-                    console.log("CPF válido");
-                }else{
-                    this.sucessIdDOM.innerHTML = "";
-                    this.erroIdDOM.innerHTML = "Hora informada inválida";
-                }
+        if(timeRegex.test(e.target.value)){
+            console.log("Hora válida");
+            return true
+        }else{
+            this.sucessIdDOM.innerHTML = "";
+            this.erroIdDOM.innerHTML = "Hora informada inválida";
+            return false
+        }
+    }
+    isValid(){
+        if(this.valid === true){
+            this.erroIdDOM.innerHTML = "";
+            this.sucessIdDOM.innerHTML = "Pode prosseguir";
+
+        }
+    }
+    verifyName(e){
+        let inputValue = "";
+        inputValue = e.target.value;
+        if(inputValue.search(/[0-9]/) > -1){
+            let matchCaracteres = inputValue.match(/[0-9]/);
+            this.sucessIdDOM.innerHTML = "";
+            this.erroIdDOM.innerHTML = `Os caracteres a seguir são inválidos: ${matchCaracteres.input}`;
+            return false
+        }else{
+            return true
+        }
     }
 }
