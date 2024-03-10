@@ -134,7 +134,7 @@
     border-radius: 20%;
     color: #ffffff;
 }
-.current-day-mark{
+.calendar-days div.current-day-mark{
     background-color: #0eef19;
     border-radius: 20%;
     color: #ffffff;
