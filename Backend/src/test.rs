@@ -101,4 +101,5 @@ mod tests {
             Usuario::new(String::from("godoberto"), String::from("12345678910"));
         assert_eq!(godoberto.validar_cpf(), false)
     }
+
 }

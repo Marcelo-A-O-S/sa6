@@ -5,3 +5,7 @@ edition = "2021"
 
 [dependencies]
 chrono = "0.4.34"
+diesel = "2.1.4"
+mysql = "24.0.0"
+serde = "1.0.197"
+warp = "0.3.6"
