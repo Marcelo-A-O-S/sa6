@@ -9,7 +9,7 @@
     <link href="./assets/css/fonts.css" rel="stylesheet">
     <link href="./assets/css/media.css" rel="stylesheet">
     <script src="./assets/js/utils/Navbar.js"></script>
-    <title>Cadastrar Usuário</title>
+    <title id="title-page">Cadastrar Usuário</title>
 </head>
 <body class="body dark">
     <header id="item-navbar" class="navbar">
@@ -17,11 +17,15 @@
 
     <main class="main">
         <aside>
-            <h2 class="title"><span>Cadastrar Usuário</span></h2>
-            <form class="form">
+            <h2 class="title"><span id="title-form">Cadastrar Usuário</span></h2>
+            <form id="formUsuarios" class="form">
+                <input class="input_text" id="Id" disabled type="text" placeholder="">
+                <span style="color: rgb(13, 246, 13);" id="IdSucess">
+                </span>
+                <span style="color: red;" id="IdError">
+                </span>
                 <input class="input_text" id="nome" type="text" placeholder="Nome">
                 <span style="color: rgb(13, 246, 13);" id="nomeSucess">
-
                 </span>
                 <span style="color: red;" id="nomeError">
                 </span>
@@ -30,7 +34,7 @@
                 </span>
                 <span style="color: red;" id="CPFError">
                 </span>
-                <input class="button input_text" type="submit" disabled value="Cadastrar >">
+                <input id="btnSubmitUsuarios" class="button input_text" type="submit" disabled value="Cadastrar >">
             </form>
         </aside>
 

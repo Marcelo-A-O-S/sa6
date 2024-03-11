@@ -48,6 +48,7 @@ const isLeapYear = (year) => {
 
     for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
       let day = document.createElement('div');
+      day.classList.add("day")
 
       if (i >= first_day.getDay()) {
         day.innerHTML = i - first_day.getDay() + 1;
@@ -57,6 +58,7 @@ const isLeapYear = (year) => {
           month === currentDate.getMonth()
         ) {
           day.classList.add('current-date');
+
         }
       }
       calendar_days.appendChild(day);

@@ -14,11 +14,12 @@ async function LoadUsuarios(){
         return(
             `
             <tr class="">
+            <td class="text-light">${item.Id}</td>
                 <td class="text-light">${item.nome}</td>
                 <td class="text-light">${item.CPF}</td>
                 <td class="d-flex align-items-center gap-4" colspan="3">
-                    <button onclick="window.location.href='pag10.html'" class="btn-custom">Atualizar</button>
-                    <button onclick="window.location.href='pag10.html'" class="btn btn-danger">Remover</button>
+                    <button onclick="window.location.href='CriarUsuarios.html?Id=${item.Id}'" class="btn-custom">Atualizar</button>
+                    <button onclick="window.location.href='CriarUsuarios.html?Id=${item.Id}'" class="btn btn-danger">Remover</button>
                 </td>
             </tr>
             `
