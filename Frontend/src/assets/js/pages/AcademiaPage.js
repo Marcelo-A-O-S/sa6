@@ -20,7 +20,7 @@ async function LoadAgendamentos(){
                 <td class="text-light">${item.HorarioInicial}</td>
                 <td class="text-light">${item.HorarioFinal}</td>
                 <td class="d-flex align-items-center gap-4" colspan="3">
-                    <button onclick="window.location.href='pag10.html'" class="btn-custom">Atualizar</button>
+                    <button onclick="window.location.href='CriarAgendamento.html?'" class="btn-custom">Atualizar</button>
                     <button onclick="window.location.href='pag10.html'" class="btn btn-danger">Remover</button>
                 </td>
             </tr>
