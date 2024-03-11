@@ -22,7 +22,9 @@ export class InputValidation{
         this.valid = false;
     }
     setValue(value){
+        const event = new Event("input");
         this.inputIdDOM.value = value;
+        this.inputIdDOM.dispatchEvent(event)
     }
     getValue(){
         return this.inputIdDOM.value;
@@ -30,9 +32,6 @@ export class InputValidation{
     onChangeInput(){
         const event = new Event("input");
         this.inputIdDOM.addEventListener("input",(e)=>{
-            console.log(e.target.value.length);
-            console.log(e.target.value)
-            console.log(e)
             if(this.typeValidation == TYPEVALIDATION.NUMBER){
 
             }
@@ -63,13 +62,28 @@ export class InputValidation{
 
             }
             if(this.typeValidation == TYPEVALIDATION.EMAIL){
-                this.verifyFieldEmpty(e);
-                this.isValid()
+                if(this.verifyFieldEmpty(e)){
+                    this.valid = true;
+                    this.isValid();
+                }
+
             }
             if(this.typeValidation == TYPEVALIDATION.TIME){
-                this.verifyFieldEmpty(e);
-                this.verifyTime(e);
-                this.isValid()
+                this.maskTime(e);
+                if(this.verifyFieldEmpty(e)){
+                    if(this.verifyTime(e)){
+                        this.valid = true;
+                        this.isValid()
+                    }
+                }
+            }
+            if(this.typeValidation == TYPEVALIDATION.DATE){
+                if(this.verifyFieldEmpty(e)){
+                    if(this.verifyDate(e)){
+                        this.valid = true;
+                        this.isValid();
+                    }
+                }
             }
         })
         this.inputIdDOM.dispatchEvent(event);
@@ -85,6 +99,13 @@ export class InputValidation{
             return true;
         }
 
+    }
+    maskTime(e){
+        if(e.target.selectionEnd == 2){
+            e.target.value += ":"
+        }else if(e.target.selectionEnd == 5){
+            e.target.value += ":"
+        }
     }
     maskCPF(e){
         if(e.target.selectionEnd == 3){
@@ -147,6 +168,22 @@ export class InputValidation{
         if(inputValue.search(/[a-zA-Z]/) > -1){
             let matchCaracteres = inputValue.match(/[a-zA-Z]/);
             this.erroIdDOM.innerHTML = `Os caracteres a seguir são inválidos: ${matchCaracteres.input}`;
+            return false
+        }
+    }
+    verifyDate(e){
+        const dateRegex = /^[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]$/;
+        let inputValue = e.target.value
+        if(inputValue.search(/[a-zA-Z]/) > -1){
+            let caracteresMatch = inputValue.match(/[a-zA-Z]/);
+            this.sucessIdDOM.innerHTML = "";
+            this.erroIdDOM.innerHTML = `Os caracteres a seguir são inválidos: ${caracteresMatch}`;
+            return false
+        }else if(dateRegex.test(inputValue)){
+            return true
+        }else{
+            this.sucessIdDOM.innerHTML = "";
+            this.erroIdDOM.innerHTML = `Formato de data inválido`;
             return false
         }
     }

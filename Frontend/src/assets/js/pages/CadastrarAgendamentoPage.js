@@ -2,9 +2,12 @@ import {InputValidation,TYPEVALIDATION} from "../utils/InputValidation.js"
 import {ApiAgendamento} from "../api/ApiAgendamento.js"
 import {FormValidation} from "../utils/FormValidation.js"
 import {ButtonValidation} from "../utils/ButtonValidation.js"
+import {Agendamento} from "../models/Agendamento.js"
+const Meses = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+]
 
-let year = document.getElementById("year");
-let dateCurrent = document.querySelector(".current-day");
+
 let btnLastMonth = document.getElementById("pre-year");
 let btnNextMonth = document.getElementById("next-year");
 const inputNome = new InputValidation("nome","nomeError","nomeSucess",TYPEVALIDATION.NAME);
@@ -14,6 +17,10 @@ const inputHorarioFinal = new InputValidation("HorarioFinal", "HorarioFinalError
 const btnSubmit = new ButtonValidation("btnSubmitAgendamento")
 const FormSubmit = new FormValidation("formAgendamentos",[inputNome,inputData,inputHorarioInicial,inputHorarioFinal],btnSubmit)
 FormSubmit.onChanges();
+FormSubmit.onSubmit(()=>{
+
+})
+
 async function InsertOnClick(){
     let day = document.querySelectorAll(".day");
     day.forEach((item)=>{
@@ -25,6 +32,12 @@ async function InsertOnClick(){
             if(item.innerHTML !== ""){
                 item.classList.add("current-day-mark")
             }
+            let dateCurrent = document.querySelector(".current-day-mark");
+            let year = document.getElementById("year");
+            let month = document.getElementById("month-picker");
+            let numDateCurrent = dateCurrent.innerHTML;
+            let numMonth = Meses.indexOf(month.innerHTML) +1;
+            inputData.setValue(`${String(numDateCurrent).padStart(2,"0")}/${String(numMonth).padStart(2,"0")}/${year.innerHTML}`);
         })
     })
 }
