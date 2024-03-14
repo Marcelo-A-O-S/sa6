@@ -1,18 +1,19 @@
-#[derive(Debug)]
-struct TesteGenerico<T>{
-    atributo1: T,
-    atributo2: T,
+use actix_web::{web, App, HttpServer, Responder};
+use dotenvy::*;
+use diesel::*;
+mod repository;
+mod entities;
+mod routes;
+use entities::Academia::Academia;
+use entities::Usuarios::Usuario;
+use routes::AppServer;
+fn main(){
+    let user = Usuario{
+        cpf: String::from("Teste"),
+        nome: String::from("Henrique")
+    };
 
-}
-
-impl<T: std::fmt::Debug> TesteGenerico<T>{
-    fn teste(self){
-        println!("{:?}", self.atributo1);
-    }
-}
-fn main() {
-    let testeGenerico = TesteGenerico{atributo1: "Teste", atributo2: "Teste2"};
-    testeGenerico.teste();
+    println!("Nome do meliante: {:?}", user.nome);
 }
 
 
