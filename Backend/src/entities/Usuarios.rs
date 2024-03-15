@@ -1,17 +1,25 @@
 use serde::{Serialize,Deserialize};
-use diesel;
-#[derive( PartialEq, Debug, Clone)]
 
+use diesel::*;
+use diesel::prelude::*;
+use crate::schema::{usuario};
+#[derive( Queryable, PartialEq, Debug, Clone)]
 pub struct Usuario {
+    pub Id: i32,
     pub nome: String,
-    pub cpf: String,
+    pub CPF: String,
 }
-
+#[derive(Insertable)]
+#[diesel(table_name = usuario)]
+pub struct NovoUsuario {
+    pub nome: String,
+    pub CPF: String
+}
 impl Usuario {
-    pub fn new(&self, nome: String, cpf: String) -> Usuario {
-        Usuario { nome: nome, cpf: cpf}
+    pub fn new(id: i32, nome: String, cpf: String) -> Usuario {
+        Usuario { Id: id ,nome: nome, CPF: cpf}
     }
     pub fn validar_cpf(self) -> bool {
-        self.cpf.chars().count() == 14
+        self.CPF.chars().count() == 14
     }
 }
