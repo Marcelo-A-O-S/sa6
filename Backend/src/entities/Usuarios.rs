@@ -1,5 +1,5 @@
-use serde::{Serialize,Deserialize};
-use diesel;
+
+
 #[derive( PartialEq, Debug, Clone)]
 
 pub struct Usuario {
