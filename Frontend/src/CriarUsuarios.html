@@ -9,7 +9,7 @@
     <link href="./assets/css/fonts.css" rel="stylesheet">
     <link href="./assets/css/media.css" rel="stylesheet">
     <script src="./assets/js/utils/Navbar.js"></script>
-    <title>Cadastrar Usuário</title>
+    <title id="title-page">Cadastrar Usuário</title>
 </head>
 <body class="body dark">
     <header id="item-navbar" class="navbar">
@@ -17,11 +17,15 @@
 
     <main class="main">
         <aside>
-            <h2 class="title"><span>Cadastrar Usuário</span></h2>
+            <h2 class="title"><span id="title-form">Cadastrar Usuário</span></h2>
             <form id="formUsuarios" class="form">
+                <input class="input_text" id="Id" disabled type="text" placeholder="">
+                <span style="color: rgb(13, 246, 13);" id="IdSucess">
+                </span>
+                <span style="color: red;" id="IdError">
+                </span>
                 <input class="input_text" id="nome" type="text" placeholder="Nome">
                 <span style="color: rgb(13, 246, 13);" id="nomeSucess">
-
                 </span>
                 <span style="color: red;" id="nomeError">
                 </span>
@@ -39,5 +43,83 @@
         </article>
     </main>
     <script type="module" src="./assets/js/pages/CadastrarUsuarioPage.js"></script>
+
+    <script>
+        window.onload = function() {
+          fetch('Academia.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 1');
+              }
+            })
+            .catch(error => {
+              window.location.href = 'error.html'; 
+            });
+        };
+
+        window.onload = function() {
+          fetch('page03.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 2');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academias.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 3');
+              }
+            })
+            .catch(error => {
+              
+            });
+        };
+
+        window.onload = function() {
+          fetch('Home.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 4');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+        window.onload = function() {
+          fetch('Index.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 5');
+              }
+            })
+            .catch(error => {
+           
+            });
+        };
+
+        window.onload = function() {
+          fetch('Usuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 6');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+      </script>
+
 </body>
 </html>

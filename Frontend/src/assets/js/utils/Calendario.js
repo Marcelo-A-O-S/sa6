@@ -43,11 +43,28 @@ const generateCalendar = (month, year) => {
     if (i >= first_day.getDay()) {
       day.innerHTML = i - first_day.getDay() + 1;
 
+<<<<<<< HEAD
       if (i - first_day.getDay() + 1 === currentDate.getDate() &&
         year === currentDate.getFullYear() &&
         month === currentDate.getMonth()
       ) {
         day.classList.add('current-date');
+=======
+    for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
+      let day = document.createElement('div');
+      day.classList.add("day")
+
+      if (i >= first_day.getDay()) {
+        day.innerHTML = i - first_day.getDay() + 1;
+
+        if (i - first_day.getDay() + 1 === currentDate.getDate() &&
+          year === currentDate.getFullYear() &&
+          month === currentDate.getMonth()
+        ) {
+          day.classList.add('current-date');
+
+        }
+>>>>>>> c12f0eaf856483ef89a603daebd5c3541b3c8677
       }
     }
     calendar_days.appendChild(day);

@@ -74,5 +74,82 @@
             });
         });
     </script>
+    
+       <script>
+        window.onload = function() {
+          fetch('CriarUsuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 1');
+              }
+            })
+            .catch(error => {
+              window.location.href = 'error.html'; 
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academia.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 2');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academias.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 3');
+              }
+            })
+            .catch(error => {
+              
+            });
+        };
+
+        window.onload = function() {
+          fetch('Home.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 4');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+        window.onload = function() {
+          fetch('Index.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 5');
+              }
+            })
+            .catch(error => {
+           
+            });
+        };
+
+        window.onload = function() {
+          fetch('Usuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 6');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+      </script>
 </body>
 </html>

@@ -16,10 +16,11 @@ async function LoadAgendamentos(){
             `
             <tr class="">
                 <td class="text-light">${item.Nome}</td>
-                <td class="text-light">${item.Dia}</td>
-                <td class="text-light">${item.Horario}</td>
+                <td class="text-light">${item.Data}</td>
+                <td class="text-light">${item.HorarioInicial}</td>
+                <td class="text-light">${item.HorarioFinal}</td>
                 <td class="d-flex align-items-center gap-4" colspan="3">
-                    <button onclick="window.location.href='pag10.html'" class="btn-custom">Atualizar</button>
+                    <button onclick="window.location.href='CriarAgendamento.html?'" class="btn-custom">Atualizar</button>
                     <button onclick="window.location.href='pag10.html'" class="btn btn-danger">Remover</button>
                 </td>
             </tr>
