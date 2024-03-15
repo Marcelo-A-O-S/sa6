@@ -5,6 +5,7 @@ struct AcademiaRepository{
 }
 impl TRepository<Academia> for AcademiaRepository{
     async fn Salvar(entidade: Academia) {
+        
         todo!()
     }
 

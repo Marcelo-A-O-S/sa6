@@ -1,10 +1,6 @@
-<<<<<<< HEAD
+
 use serde::{Serialize,Deserialize};
-=======
 
-
-#[derive( PartialEq, Debug, Clone)]
->>>>>>> e096852d21975b9a1438409ed6f96634dd56c077
 
 use diesel::*;
 use diesel::prelude::*;
