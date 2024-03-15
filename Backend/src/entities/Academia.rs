@@ -34,7 +34,7 @@ use super::Agendamento::Agendamento;
         pub fn agendar(&mut self, agendamento: Agendamento) {
             self.validar_horario(&agendamento.horainicio, &agendamento.horafim);
             if self.horariosagendados.contains_key(&agendamento.horainicio) {
-                let mut temp: &mut Vec<Agendamento> = self.horariosagendados.get_mut(&agendamento.horainicio).unwrap();
+                let temp: &mut Vec<Agendamento> = self.horariosagendados.get_mut(&agendamento.horainicio).unwrap();
                 if temp.len() < self.capacidade as usize {
                     temp.push(agendamento);
                 } else {

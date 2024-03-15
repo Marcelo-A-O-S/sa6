@@ -1,13 +1,13 @@
-use actix_web::{web, App, HttpServer};
+use actix_web::{App, HttpServer};
 pub mod controllers;
 
-use crate::routes::controllers::AcademiaController::GetAllAcademias;
+use crate::routes::controllers::AcademiaController::academia_controller;
 
 
 
-pub async fn AppServer(){
-    let server = HttpServer::new(||{
+pub async fn app_server() {
+    let _server = HttpServer::new(||{
         App::new()
-        .service(GetAllAcademias)
+        .service(academia_controller)
     });
 }
