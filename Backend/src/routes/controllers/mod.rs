@@ -1,2 +1,2 @@
 
-pub mod academiaController;
+pub mod AcademiaController;
