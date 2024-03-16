@@ -3,16 +3,24 @@
 diesel::table! {
     academia (Id) {
         Id -> Integer,
-        CapacidadeUsuarios -> Integer,
         #[max_length = 255]
         NomeComercial -> Varchar,
         #[max_length = 255]
         Endereco -> Varchar,
         HorarioAbertura -> Time,
         HorarioFechamento -> Time,
+        CapacidadeUsuarios -> Integer,
     }
 }
-
+diesel::table! {
+    usuario (Id) {
+        Id -> Integer,
+        #[max_length = 255]
+        nome -> Varchar,
+        #[max_length = 14]
+        CPF -> Varchar,
+    }
+}
 diesel::table! {
     academiausuarios (Id) {
         Id -> Integer,
@@ -32,15 +40,7 @@ diesel::table! {
     }
 }
 
-diesel::table! {
-    usuario (Id) {
-        Id -> Integer,
-        #[max_length = 255]
-        nome -> Varchar,
-        #[max_length = 14]
-        CPF -> Varchar,
-    }
-}
+
 
 diesel::joinable!(academiausuarios -> academia (AcademiaId));
 diesel::joinable!(academiausuarios -> usuario (UsuarioId));

@@ -1,41 +1,60 @@
 use std::collections::HashMap;
-use super::DataHora::DataHora;
+use diesel::*;
+use serde::{Serialize,Deserialize};
+use chrono::{NaiveTime};
+use diesel::sql_types::{BigInt, Time, Timestamp};
+use crate::schema::{academia};
 use super::Agendamento::Agendamento;
-#[derive(Debug)]
+#[derive(Debug, Queryable, PartialEq, Clone)]
     pub struct Academia {
-        pub nome: String,
-        pub horario_abertura: u32,
-        pub horario_fechamento: u32,
-        pub capacidade: u32,
-        pub horariosagendados: HashMap<DataHora, Vec<Agendamento>>,
+        pub Id: i32,
+        pub NomeComercial: String,
+        pub Endereco: String,
+        pub HorarioAbertura: NaiveTime,
+        pub HorarioFechamento: NaiveTime,
+        pub CapacidadeUsuarios: i32,
+       // pub horariosagendados: HashMap<DataHora, Vec<Agendamento>>,
     }
-
+    //the trait bound `(i32, std::string::String, std::string::String, NaiveTime, NaiveTime, i32)
+#[derive(Insertable)]
+#[diesel(table_name = academia)]
+    pub struct NovaAcademia{
+        pub NomeComercial: String,
+        pub Endereco: String,
+        pub HorarioAbertura: NaiveTime,
+        pub HorarioFechamento: NaiveTime,
+        pub CapacidadeUsuarios: i32
+    }
     impl Academia {
         pub fn new(
-            nome: String,
-            horario_abertura: u32,
-            horario_fechamento: u32,
-            capacidade: u32,
-            horariosagendados: HashMap<DataHora, Vec<Agendamento>>,
+            Id: i32,
+            NomeComercial: String,
+            HorarioAbertura: NaiveTime,
+            HorarioFechamento: NaiveTime,
+            CapacidadeUsuarios: i32,
+            Endereco: String,
+            //horariosagendados: HashMap<DataHora, Vec<Agendamento>>,
         ) -> Self {
             Academia {
-                nome,
-                horario_abertura,
-                horario_fechamento,
-                capacidade,
-                horariosagendados,
+                Id,
+                NomeComercial,
+                HorarioAbertura,
+                HorarioFechamento,
+                CapacidadeUsuarios,
+                Endereco,
+                //horariosagendados,
             }
         }
-        pub fn validar_horario(&self, horainicio: &DataHora, horafim: &DataHora) {
-            if horainicio.hora < self.horario_abertura || horafim.hora > self.horario_fechamento {
+        pub fn validar_horario(&self, horainicio: &NaiveTime, horafim: &NaiveTime) {
+            if *horainicio < self.HorarioAbertura || *horafim > self.HorarioFechamento {
                 panic!("horario fora do funcionamento")
             }
         }
         pub fn agendar(&mut self, agendamento: Agendamento) {
-            self.validar_horario(&agendamento.horainicio, &agendamento.horafim);
-            if self.horariosagendados.contains_key(&agendamento.horainicio) {
+            self.validar_horario(&agendamento.horainicio.hora, &agendamento.horafim.hora);
+/*             if self.horariosagendados.contains_key(&agendamento.horainicio) {
                 let temp: &mut Vec<Agendamento> = self.horariosagendados.get_mut(&agendamento.horainicio).unwrap();
-                if temp.len() < self.capacidade as usize {
+                if temp.len() < self.CapacidadeUsuarios as usize {
                     temp.push(agendamento);
                 } else {
                     panic!("lotado")
@@ -44,6 +63,6 @@ use super::Agendamento::Agendamento;
                 let mut temp = Vec::new();
                 temp.push(agendamento.clone());
                 self.horariosagendados.insert(agendamento.horainicio, temp);
-            }
+            } */
         }
     }

@@ -4,7 +4,7 @@ use chrono::Local;
 use chrono::DateTime;
 use chrono::Timelike;
 use chrono::Datelike;
-
+use chrono::NaiveTime;
 use crate::entities::enums::EMes::Mes;
 
 #[derive(PartialEq, Debug, Eq, Hash, Clone)]
@@ -12,11 +12,11 @@ use crate::entities::enums::EMes::Mes;
         pub ano: u32,
         pub mes: Mes,
         pub dia: u32,
-        pub hora: u32,
+        pub hora: NaiveTime,
     }
 
     impl DataHora {
-        pub fn new(ano: u32, mes: Mes, dia: u32, hora: u32) -> Self {
+        pub fn new(ano: u32, mes: Mes, dia: u32, hora: NaiveTime) -> Self {
             let obj: DataHora = DataHora {
                 ano,
                 mes,
@@ -50,17 +50,14 @@ use crate::entities::enums::EMes::Mes;
                 panic!("esse dia não existe...")
             }
 
-            match self.hora {
-                0..=24 => {}
-                _ => panic!("que horas?"),
-            }
+
         }
         pub fn data_futura(&self) -> bool {
             let localtime: DateTime<Local> = Local::now();
             let ano = localtime.year() as u32;
             let mes = localtime.month();
             let dia = localtime.day();
-            let hora = localtime.hour();
+            let hora = NaiveTime::from_hms(localtime.hour(),localtime.minute(),localtime.second());
             let mesmarcado = match self.mes {
                 Mes::Janeiro => 1,
                 Mes::Fevereiro => 2,

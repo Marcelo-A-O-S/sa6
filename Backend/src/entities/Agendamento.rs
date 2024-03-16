@@ -1,6 +1,7 @@
+use diesel::*;
 use super::Usuarios::Usuario;
 use super::DataHora::DataHora;
-#[derive(PartialEq, Debug, Clone)]
+#[derive(Debug, Queryable, PartialEq, Clone)]
     pub struct Agendamento {
         pub usuario: Usuario,
         pub horainicio: DataHora,

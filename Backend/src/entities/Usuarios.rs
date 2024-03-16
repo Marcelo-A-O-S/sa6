@@ -3,9 +3,8 @@ use serde::{Serialize,Deserialize};
 
 
 use diesel::*;
-use diesel::prelude::*;
 use crate::schema::{usuario};
-#[derive( Queryable, PartialEq, Debug, Clone)]
+#[derive(Queryable, PartialEq, Debug, Clone)]
 pub struct Usuario {
     pub Id: i32,
     pub nome: String,
