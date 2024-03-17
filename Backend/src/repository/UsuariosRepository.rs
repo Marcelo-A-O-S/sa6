@@ -36,7 +36,7 @@ impl TRepository<Usuario>  for UsuarioRepository{
     }
     
     async fn listar(&mut self) -> Vec<Usuario> {
-        let conn = &mut estabilishConnection();
+        
         //let results: Vec<Usuario> = usuario.load(conn).expect("Erro em fazer consulta");
         let mut listaUsuarios: Vec<Usuario> = Vec::new();
         match usuario.load::<Usuario>(&mut self.conn){

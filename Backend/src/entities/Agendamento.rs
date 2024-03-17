@@ -1,6 +1,7 @@
 use diesel::*;
 use super::Usuarios::Usuario;
 use super::DataHora::DataHora;
+use crate::schema::{agendamento};
 /* Id -> Integer,
         AcademiaId -> Nullable<Integer>,
         UsuarioId -> Nullable<Integer>,
@@ -14,7 +15,13 @@ use super::DataHora::DataHora;
         pub UsuarioId: i32,
         pub DataHoraId: i32,
     }
-
+#[derive(Insertable)]
+#[diesel(table_name = agendamento)]
+    pub struct NovoAgendamento {
+        pub AcademiaId: i32,
+        pub UsuarioId: i32,
+        pub DataHoraId: i32,
+    }
     impl Agendamento {
        /*  pub fn new(usuario: Usuario, horainicio: DataHora, horafim: DataHora) -> Self {
             let temp = Agendamento {

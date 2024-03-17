@@ -50,7 +50,7 @@ use super::Agendamento::Agendamento;
             }
         }
         pub fn agendar(&mut self, agendamento: Agendamento) {
-            self.validar_horario(&agendamento.horainicio.hora, &agendamento.horafim.hora);
+            //self.validar_horario(&agendamento.horainicio.hora, &agendamento.horafim.hora);
 /*             if self.horariosagendados.contains_key(&agendamento.horainicio) {
                 let temp: &mut Vec<Agendamento> = self.horariosagendados.get_mut(&agendamento.horainicio).unwrap();
                 if temp.len() < self.CapacidadeUsuarios as usize {

@@ -34,7 +34,7 @@ impl TRepository<Academia> for AcademiaRepository {
     }
 
     async fn listar(&mut self) -> Vec<Academia> {
-        let conn = &mut estabilishConnection();
+        
         let mut listaAcademias: Vec<Academia> = Vec::new();
         match academia.load::<Academia>(&mut self.conn) {
             Ok((results)) => {
@@ -59,7 +59,7 @@ impl TRepository<Academia> for AcademiaRepository {
     }
 
     async fn update(&mut self,entidade: Academia) {
-        let conn = &mut estabilishConnection();
+        
         update(academia)
             .set((
                 Endereco.eq(entidade.Endereco),
@@ -68,7 +68,7 @@ impl TRepository<Academia> for AcademiaRepository {
                 CapacidadeUsuarios.eq(entidade.CapacidadeUsuarios),
             ))
             .filter(Id.eq(entidade.Id))
-            .execute(conn).expect("Houve um erro ao atualizar entidade");
+            .execute(&mut self.conn).expect("Houve um erro ao atualizar entidade");
         todo!()
     }
     
