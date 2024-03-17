@@ -57,7 +57,7 @@ use crate::entities::enums::EMes::Mes;
             let ano = localtime.year() as u32;
             let mes = localtime.month();
             let dia = localtime.day();
-            let hora = NaiveTime::from_hms(localtime.hour(),localtime.minute(),localtime.second());
+            let hora = NaiveTime::from_hms_opt(localtime.hour(),localtime.minute(),localtime.second()).unwrap();
             let mesmarcado = match self.mes {
                 Mes::Janeiro => 1,
                 Mes::Fevereiro => 2,

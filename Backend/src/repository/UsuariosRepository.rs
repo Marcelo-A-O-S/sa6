@@ -1,21 +1,27 @@
+use diesel::*;
+use diesel::{table};
 use crate::entities::Usuarios::{NovoUsuario, Usuario};
 use crate::connection::estabilishConnection;
 use crate::schema::{usuario, usuario::dsl::*};
 use super::TRepository::TRepository;
-use diesel::*;
+
 
 
 pub struct UsuarioRepository{
-    
+    pub conn: MysqlConnection,
 }
 impl UsuarioRepository{
-    fn new()-> UsuarioRepository {
-        UsuarioRepository{}
+    pub fn new()-> UsuarioRepository {
+        UsuarioRepository{
+            conn: estabilishConnection()
+        }
     }
 }
 impl TRepository<Usuario>  for UsuarioRepository{
-    async fn salvar(entidade: Usuario) {
-        let conn = &mut estabilishConnection();
+    async fn salvar(&mut self, entidade: Usuario) {
+        
+        self.conn = estabilishConnection();
+        //let conn = &mut estabilishConnection();
         
         let novo_usuario = NovoUsuario{
             CPF : entidade.CPF,
@@ -23,8 +29,9 @@ impl TRepository<Usuario>  for UsuarioRepository{
         };
         diesel::insert_into(usuario::table)
         .values(&novo_usuario)
-        .execute(conn)
+        .execute(&mut self.conn)
         .expect("Erro ao inserir dados");
+        
     }
     
     async fn listar() -> Vec<Usuario> {
@@ -46,7 +53,10 @@ impl TRepository<Usuario>  for UsuarioRepository{
         }
     }
     
-    async fn update(entidade: Usuario) {
+    async fn update(&mut self,entidade: Usuario) {
+        
+       /*  update(usuario::table.filter(entidade.Id))
+        .set() */
         todo!()
     }
 }

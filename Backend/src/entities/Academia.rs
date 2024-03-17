@@ -1,11 +1,10 @@
-use std::collections::HashMap;
+//use std::collections::HashMap;
 use diesel::*;
-use serde::{Serialize,Deserialize};
+use serde::{Serialize};
 use chrono::{NaiveTime};
-use diesel::sql_types::{BigInt, Time, Timestamp};
 use crate::schema::{academia};
 use super::Agendamento::Agendamento;
-#[derive(Debug, Queryable, PartialEq, Clone)]
+#[derive(Queryable, PartialEq, Serialize, Debug, Clone)]
     pub struct Academia {
         pub Id: i32,
         pub NomeComercial: String,

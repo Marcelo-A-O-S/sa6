@@ -1,5 +1,5 @@
 pub trait TRepository<T>{
-    async fn salvar(entidade: T);
+    async fn salvar(&mut self,entidade: T);
     async fn listar() -> Vec<T>;
-    async fn update(entidade: T);
+    async fn update(&mut self,entidade: T);
 }

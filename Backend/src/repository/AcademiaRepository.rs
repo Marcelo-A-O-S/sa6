@@ -7,9 +7,9 @@ use diesel::prelude::*;
 use diesel::*;
 
 use diesel::RunQueryDsl;
-struct AcademiaRepository {}
+pub struct AcademiaRepository {}
 impl TRepository<Academia> for AcademiaRepository {
-    async fn salvar(entidade: Academia) {
+    async fn salvar(&mut self,entidade: Academia) {
         let nova_academia = NovaAcademia {
             NomeComercial: entidade.NomeComercial,
             CapacidadeUsuarios: entidade.CapacidadeUsuarios,
@@ -49,15 +49,16 @@ impl TRepository<Academia> for AcademiaRepository {
         }
     }
 
-    async fn update(entidade: Academia) {
+    async fn update(&mut self,entidade: Academia) {
         let conn = &mut estabilishConnection();
-        update(academia::table.filter(Id.eq(entidade.Id)))
-        .set((
-            Endereco.eq(entidade.Endereco),
-            HorarioFechamento.eq(entidade.HorarioFechamento),
-            HorarioAbertura.eq(entidade.HorarioAbertura),
-            CapacidadeUsuarios.eq(entidade.CapacidadeUsuarios)
-        ))
-        .execute(conn);
+        /* update(academia::table.filter(Id.eq(entidade.Id)))
+            .set((
+                Endereco.eq(entidade.Endereco),
+                HorarioFechamento.eq(entidade.HorarioFechamento),
+                HorarioAbertura.eq(entidade.HorarioAbertura),
+                CapacidadeUsuarios.eq(entidade.CapacidadeUsuarios),
+            ))
+            .execute(conn); */
+        todo!()
     }
 }
