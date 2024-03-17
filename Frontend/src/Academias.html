@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Ilicon-The-Circus-Strong-bear.16.png" type="image/x-icon">
     <title>Academias</title>
-    <!-- Adicione o CSS do Bootstrap -->
+
     <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="./assets/css/style.css" rel="stylesheet">
     <link href="./assets/css/fonts.css" rel="stylesheet">
@@ -23,6 +23,83 @@
         <script type="module" src="./assets/js/pages/AcademiasPage.js"></script>
     </main>
     <script src="./assets/js/utils/Navbar.js"></script>
+
+    <script>
+        window.onload = function() {
+          fetch('CriarUsuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 1');
+              }
+            })
+            .catch(error => {
+              window.location.href = 'error.html'; 
+            });
+        };
+
+        window.onload = function() {
+          fetch('page03.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 2');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academia.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 3');
+              }
+            })
+            .catch(error => {
+              
+            });
+        };
+
+        window.onload = function() {
+          fetch('Home.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 4');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+        window.onload = function() {
+          fetch('Index.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 5');
+              }
+            })
+            .catch(error => {
+           
+            });
+        };
+
+        window.onload = function() {
+          fetch('Usuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 6');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+      </script>
 </body>
 </html>
 
