@@ -3,7 +3,14 @@ use crate::entities::Academia::{Academia};
 use crate::repository::AcademiaRepository::AcademiaRepository;
 use crate::repository::TRepository::TRepository;
 pub struct AcademiaServices{
-
+    repository:AcademiaRepository
+}
+impl AcademiaServices{
+    pub fn new()-> AcademiaServices{
+        AcademiaServices{
+            repository: AcademiaRepository::new()
+        }
+    }
 }
 impl TServices<Academia> for AcademiaServices{
     async fn Salvar(self, entidade :Academia) {
@@ -18,8 +25,8 @@ impl TServices<Academia> for AcademiaServices{
         todo!()
     }
 
-    async fn Listar() -> Vec<Academia> {
-        let listaAcademias = AcademiaRepository::listar().await;
+    async fn Listar(mut self) -> Vec<Academia> {
+        let listaAcademias = self.repository.listar().await;
         listaAcademias
     }
 

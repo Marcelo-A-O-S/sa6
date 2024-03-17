@@ -7,7 +7,17 @@ use diesel::prelude::*;
 use diesel::*;
 
 use diesel::RunQueryDsl;
-pub struct AcademiaRepository {}
+pub struct AcademiaRepository {
+    conn: MysqlConnection
+
+}
+impl AcademiaRepository{
+    pub fn new()->AcademiaRepository{
+        AcademiaRepository{
+            conn: estabilishConnection()
+        }
+    }
+}
 impl TRepository<Academia> for AcademiaRepository {
     async fn salvar(&mut self,entidade: Academia) {
         let nova_academia = NovaAcademia {
@@ -17,17 +27,16 @@ impl TRepository<Academia> for AcademiaRepository {
             HorarioAbertura: entidade.HorarioAbertura,
             HorarioFechamento: entidade.HorarioFechamento,
         };
-        let conn = &mut estabilishConnection();
         diesel::insert_into(academia::table)
             .values(&nova_academia)
-            .execute(conn)
+            .execute(&mut self.conn)
             .expect("Erro ao inserir dados");
     }
 
-    async fn listar() -> Vec<Academia> {
+    async fn listar(&mut self) -> Vec<Academia> {
         let conn = &mut estabilishConnection();
         let mut listaAcademias: Vec<Academia> = Vec::new();
-        match academia.load::<Academia>(conn) {
+        match academia.load::<Academia>(&mut self.conn) {
             Ok((results)) => {
                 for academiaData in results {
                     let academia_entities = Academia::new(
@@ -51,14 +60,32 @@ impl TRepository<Academia> for AcademiaRepository {
 
     async fn update(&mut self,entidade: Academia) {
         let conn = &mut estabilishConnection();
-        /* update(academia::table.filter(Id.eq(entidade.Id)))
+        update(academia)
             .set((
                 Endereco.eq(entidade.Endereco),
                 HorarioFechamento.eq(entidade.HorarioFechamento),
                 HorarioAbertura.eq(entidade.HorarioAbertura),
                 CapacidadeUsuarios.eq(entidade.CapacidadeUsuarios),
             ))
-            .execute(conn); */
+            .filter(Id.eq(entidade.Id))
+            .execute(conn).expect("Houve um erro ao atualizar entidade");
         todo!()
+    }
+    
+    async fn delete(&mut self,entidade: Academia) {
+        delete(academia)
+        .filter(Id.eq(entidade.Id))
+        .execute(&mut self.conn).expect("A entidade não foi deletada com sucesso");
+
+    }
+    
+    async fn findById(&mut self, _id: i32) -> Academia {
+        todo!()
+    }
+    
+    async fn deleteById(&mut self, _id:i32) {
+        delete(academia)
+        .filter(Id.eq(_id))
+        .execute(&mut self.conn).expect("A entidade não foi deletada com sucesso");
     }
 }

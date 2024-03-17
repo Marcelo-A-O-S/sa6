@@ -12,7 +12,8 @@ struct UsuarioRequest{
 
 #[get("/Usuarios")]
 async fn get_usuarios()->Result<HttpResponse>{
-    let listaUsuarios = UsuarioServices::Listar().await;
+    let usuarioServices = UsuarioServices::new();
+    let listaUsuarios = usuarioServices.Listar().await;
     
     Ok(HttpResponse::Ok().json(listaUsuarios))
 }

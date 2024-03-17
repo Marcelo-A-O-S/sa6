@@ -1,5 +1,4 @@
 use actix_web::*;
-
 mod repository;
 mod entities;
 mod routes;
@@ -8,7 +7,7 @@ mod connection;
 mod utils;
 mod services;
 mod generics;
-use actix_web::App;
+
 use routes::app_server;
 
 #[actix_web::main]

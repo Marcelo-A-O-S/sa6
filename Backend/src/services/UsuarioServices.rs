@@ -1,6 +1,7 @@
 use crate::entities::Usuarios::Usuario;
 use crate::repository::{TRepository::TRepository,UsuariosRepository::UsuarioRepository};
 use super::TServices::TServices;
+
 pub struct UsuarioServices{
     repository: UsuarioRepository
 }
@@ -22,16 +23,16 @@ impl TServices<Usuario> for UsuarioServices{
         
     }
 
-    async fn Deletar(self, entidade: Usuario) {
-        todo!()
+    async fn Deletar(mut self, entidade: Usuario) {
+        self.repository.delete(entidade).await;
     }
 
-    async fn Atualizar(self, entidade: Usuario) {
-        todo!()
+    async fn Atualizar(mut self, entidade: Usuario) {
+        self.repository.update(entidade).await
     }
 
-    async fn Listar() -> Vec<Usuario> {
-        let listaUsuarios = UsuarioRepository::listar().await;
+    async fn Listar(mut self) -> Vec<Usuario> {
+        let listaUsuarios = self.repository.listar().await;
         listaUsuarios
     }
 }
