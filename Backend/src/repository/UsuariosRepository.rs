@@ -1,4 +1,5 @@
-use diesel::query_dsl::methods::FilterDsl;
+
+use diesel::result::Error;
 use diesel::*;
 use diesel::{table};
 use crate::entities::Usuarios::{NovoUsuario, Usuario};
@@ -19,23 +20,22 @@ impl UsuarioRepository{
     }
 }
 impl TRepository<Usuario>  for UsuarioRepository{
-    async fn salvar(&mut self, entidade: Usuario) {
-        
-        self.conn = estabilishConnection();
-        //let conn = &mut estabilishConnection();
-        
+    async fn salvar(&mut self, entidade: Usuario) ->Result<(), Error>{
         let novo_usuario = NovoUsuario{
             CPF : entidade.CPF,
             nome: entidade.nome
         };
-        diesel::insert_into(usuario::table)
+        let result = diesel::insert_into(usuario::table)
         .values(&novo_usuario)
-        .execute(&mut self.conn)
-        .expect("Erro ao inserir dados");
-        
+        .execute(&mut self.conn);
+        if result.is_ok(){
+            Ok(())
+        }else{
+            Err(NotFound)
+        }
     }
     
-    async fn listar(&mut self) -> Vec<Usuario> {
+    async fn listar(&mut self) -> Result<Vec<Usuario>, Error>  {
         
         //let results: Vec<Usuario> = usuario.load(conn).expect("Erro em fazer consulta");
         let mut listaUsuarios: Vec<Usuario> = Vec::new();
@@ -45,36 +45,54 @@ impl TRepository<Usuario>  for UsuarioRepository{
                     let usuarioD = Usuario::new(i32::from(usuarioData.Id), String::from(usuarioData.nome), String::from(usuarioData.CPF));
                     listaUsuarios.push(usuarioD)
                 }
-                listaUsuarios
+                Ok(listaUsuarios)
             }
             Err(err)=>{
                 println!("Ocorreu o seguinte erro: {}", err);
-                listaUsuarios
+                return Err(NotFound)
             }
         }
     }
     
-    async fn update(&mut self,entidade: Usuario) {
-        update(usuario)
+    async fn update(&mut self,entidade: Usuario) -> Result<(), Error>{
+        let result = update(usuario)
         .set((CPF.eq(entidade.CPF), nome.eq(entidade.nome)))
         .filter(Id.eq(entidade.Id))
-        .execute(&mut self.conn).expect("A entidade não foi atualizada com sucesso");
-        
+        .execute(&mut self.conn);
+        if result.is_ok(){
+            Ok(())
+        }else{
+            Err(NotFound)
+        }
     }
     
-    async fn delete(&mut self,entidade: Usuario) {
-        delete(usuario)
+    async fn delete(&mut self,entidade: Usuario) ->Result<(), Error>{
+        let result = delete(usuario)
         .filter(Id.eq(entidade.Id))
-        .execute(&mut self.conn).expect("A entidade não foi deletada com sucesso");
+        .execute(&mut self.conn);
+        if result.is_ok(){
+            Ok(())
+        }else{
+            Err(()).expect("Error ao deletar entidade")
+        }
     }
     
-    async fn findById(&mut self, _id: i32) -> Usuario {
-        todo!()
+    async fn findById(&mut self, _id: i32) -> Result<Usuario, Error> {
+        let usuario_table = usuario;
+
+        let usuario_body = usuario.filter(Id.eq(_id))
+        .first::<Usuario>(&mut self.conn);
+        return Err(()).expect("Error")
     }
     
-    async fn deleteById(&mut self, _id:i32) {
-        delete(usuario)
+    async fn deleteById(&mut self, _id:i32) -> Result<(), Error>{
+        let result = delete(usuario)
         .filter(Id.eq(_id))
-        .execute(&mut self.conn).expect("A entidade não foi deletada com sucesso");
+        .execute(&mut self.conn);
+        if result.is_ok(){
+            return Ok(());
+        }else{
+            return Err(()).expect("Erro ao deletar entidade");
+        }
     }
 }

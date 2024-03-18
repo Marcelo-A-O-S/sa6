@@ -2,11 +2,10 @@ use super::TRepository::TRepository;
 use crate::connection::estabilishConnection;
 use crate::entities::Academia::{Academia, NovaAcademia};
 use crate::schema::{academia, academia::dsl::*};
-
 use diesel::prelude::*;
 use diesel::*;
-
 use diesel::RunQueryDsl;
+use diesel::result::Error;
 pub struct AcademiaRepository {
     conn: MysqlConnection
 
@@ -19,7 +18,7 @@ impl AcademiaRepository{
     }
 }
 impl TRepository<Academia> for AcademiaRepository {
-    async fn salvar(&mut self,entidade: Academia) {
+    async fn salvar(&mut self,entidade: Academia) -> Result<(), Error> {
         let nova_academia = NovaAcademia {
             NomeComercial: entidade.NomeComercial,
             CapacidadeUsuarios: entidade.CapacidadeUsuarios,
@@ -27,38 +26,42 @@ impl TRepository<Academia> for AcademiaRepository {
             HorarioAbertura: entidade.HorarioAbertura,
             HorarioFechamento: entidade.HorarioFechamento,
         };
-        diesel::insert_into(academia::table)
+        let result = diesel::insert_into(academia::table)
             .values(&nova_academia)
-            .execute(&mut self.conn)
-            .expect("Erro ao inserir dados");
+            .execute(&mut self.conn);
+        if result.is_ok(){
+            Ok(())
+        }else{
+            Err(()).expect("Error ao salvar entidade")
+        }
     }
 
-    async fn listar(&mut self) -> Vec<Academia> {
-        
+    async fn listar(&mut self) -> Result<Vec<Academia>, Error> {
+        let academia_table =academia;
         let mut listaAcademias: Vec<Academia> = Vec::new();
-        match academia.load::<Academia>(&mut self.conn) {
-            Ok((results)) => {
-                for academiaData in results {
+        match academia_table.load::<Academia>(&mut self.conn){
+            Ok(results)=>{
+                for academiaData in results{
                     let academia_entities = Academia::new(
                         academiaData.Id,
                         academiaData.NomeComercial,
                         academiaData.HorarioAbertura,
                         academiaData.HorarioFechamento,
                         academiaData.CapacidadeUsuarios,
-                        academiaData.Endereco,
+                        academiaData.Endereco
                     );
                     listaAcademias.push(academia_entities)
                 }
-                listaAcademias
+                return Ok(listaAcademias)
             }
-            Err(err) => {
+            Err(err)=>{
                 println!("Ocorreu o seguinte erro: {}!", err);
-                listaAcademias
+                return Err(()).expect("Erro ao puxar informações");
             }
         }
     }
 
-    async fn update(&mut self,entidade: Academia) {
+    async fn update(&mut self,entidade: Academia) ->Result<(), Error>{
         
         update(academia)
             .set((
@@ -72,20 +75,29 @@ impl TRepository<Academia> for AcademiaRepository {
         todo!()
     }
     
-    async fn delete(&mut self,entidade: Academia) {
-        delete(academia)
+    async fn delete(&mut self,entidade: Academia)->Result<(), Error> {
+        let result = delete(academia)
         .filter(Id.eq(entidade.Id))
-        .execute(&mut self.conn).expect("A entidade não foi deletada com sucesso");
-
+        .execute(&mut self.conn);
+        if result.is_ok(){
+            Ok(())
+        }else{
+            Err(()).expect("Error ao deletar entidade")
+        }
     }
     
-    async fn findById(&mut self, _id: i32) -> Academia {
+    async fn findById(&mut self, _id: i32) -> Result<Academia,Error> {
         todo!()
     }
     
-    async fn deleteById(&mut self, _id:i32) {
-        delete(academia)
+    async fn deleteById(&mut self, _id:i32) -> Result<(),Error> {
+        let result = delete(academia)
         .filter(Id.eq(_id))
-        .execute(&mut self.conn).expect("A entidade não foi deletada com sucesso");
+        .execute(&mut self.conn);
+        if result.is_ok(){
+            Ok(())
+        }else{
+            Err(()).expect("Error ao deletar entidade")
+        }
     }
 }

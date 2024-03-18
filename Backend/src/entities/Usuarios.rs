@@ -2,7 +2,9 @@
 use serde::{Serialize,Deserialize};
 use diesel::*;
 use crate::schema::{usuario};
-#[derive(Queryable, PartialEq, Serialize, Debug, Clone)]
+#[derive(Queryable, Selectable,Identifiable, PartialEq, Serialize, Debug, Clone)]
+#[diesel(table_name = usuario)]
+#[diesel(primary_key(Id))]
 pub struct Usuario {
     pub Id: i32,
     pub nome: String,
@@ -18,7 +20,7 @@ impl Usuario {
     pub fn new(id: i32, nome: String, cpf: String) -> Usuario {
         Usuario { Id: id ,nome: nome, CPF: cpf}
     }
-    pub fn validar_cpf(self) -> bool {
+    pub fn validar_cpf(&mut self) -> bool {
         self.CPF.chars().count() == 14
     }
 }

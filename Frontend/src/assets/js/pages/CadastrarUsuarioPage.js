@@ -32,12 +32,14 @@ async function LoadUsuario(){
         inputId.setValue(0);
     }
 }
-formSubmit.onSubmit(()=>{
+formSubmit.onSubmit(async ()=>{
+    const apiUsuarios = new ApiUsuarios();
     const usuario = new Usuario();
-    usuario.Id = inputId.getValue();
+    usuario.Id = parseInt(inputId.getValue());
     usuario.CPF = inputCPF.getValue();
     usuario.nome = inputNome.getValue();
-    console.log(usuario)
+    console.log(usuario);
+    await apiUsuarios.createUsuarios(usuario);
 
 })
 document.addEventListener('DOMContentLoaded',LoadUsuario)

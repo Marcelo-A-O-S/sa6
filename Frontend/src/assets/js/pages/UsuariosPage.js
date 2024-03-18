@@ -1,7 +1,8 @@
 import {ApiUsuarios} from "../api/ApiUsuarios.js"
+import { Usuario } from "../models/Usuario.js";
 
 
-let Usuarios = [];
+let Usuarios = new Array();
 let contentUsuarios;
 async function LoadUsuarios(){
     const contentPage = document.getElementById("content-usuarios");

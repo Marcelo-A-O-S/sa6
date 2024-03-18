@@ -1,6 +1,9 @@
+use std::error::Error;
+use crate::utils::Errors::{ErrorProject};
 pub trait TServices<T>{
-    async fn Salvar(self, _entidade :T);
-    async fn Deletar(self, _entidade: T);
-    async fn Atualizar(self, _entidade: T);
-    async fn Listar(self) -> Vec<T>;
+    async fn Salvar(&mut self, _entidade :T)-> Result<(),ErrorProject>;
+    async fn Deletar(&mut self, _entidade: T) -> Result<(),ErrorProject>;
+    async fn Atualizar(&mut self, _entidade: T) ->Result<(),ErrorProject>;
+    async fn Listar(&mut self) -> Result<Vec<T>,ErrorProject>;
+    async fn BuscarPorId(&mut self, _id: i32)->Result<T,ErrorProject>;
 }
