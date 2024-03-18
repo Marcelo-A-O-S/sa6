@@ -82,6 +82,7 @@ pub async fn delete_academia(academiaJson: web::Json<AcademiaRequest>)-> Result<
     let academia_body = academiaJson.into_inner();
     let mut academia_services = AcademiaServices::new();
     if academia_body.Endereco != "" && academia_body.NomeComercial != "" && academia_body.CapacidadeUsuarios != 0 {
+<<<<<<< HEAD
         if academia_body != 0 {
             let result_busca = academia_services.BuscarPorId(academia_body.Id).await;
         }else{
@@ -89,5 +90,8 @@ pub async fn delete_academia(academiaJson: web::Json<AcademiaRequest>)-> Result<
         }
     }else{
         Ok(HttpResponse::Ok().json("Dados inválidos"))
+=======
+        
+>>>>>>> origin/main
     }
 }
