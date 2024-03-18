@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -12,69 +13,83 @@
     <script src="script.js" defer></script>
     <title>Cadastrar agendamento</title>
 </head>
-<body>
-  <section>
-    <div class="container">
-      <div class="calendar">
-        <div class="calendar-header">
-          <span class="month-picker" id="month-picker"> May </span>
-          <div class="year-picker" id="year-picker">
-            <span class="year-change" id="pre-year">
-              <pre>&lt;</pre>
-            </span>
-            <span id="year">2020</span>
-            <span class="year-change" id="next-year">
-              <pre>&gt;</pre>
-            </span>
+<body class="body dark">
+  <header id="item-navbar" class="navbar">
+  </header>
+  <main class="main">
+    <section>
+      <div class="container">
+        <div class="calendar">
+          <div class="calendar-header">
+            <span class="month-picker" id="month-picker"> May </span>
+            <div class="year-picker" id="year-picker">
+              <span class="year-change" id="pre-year">
+                <pre>&lt;</pre>
+              </span>
+              <span id="year">2020</span>
+              <span class="year-change" id="next-year">
+                <pre>&gt;</pre>
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="calendar-body">
-          <div class="calendar-week-days">
-            <div>Dom</div>
-            <div>Seg</div>
-            <div>Ter</div>
-            <div>Qua</div>
-            <div>Qui</div>
-            <div>Sex</div>
-            <div>Sab</div>
+          <div class="calendar-body">
+            <div class="calendar-week-days">
+              <div>Dom</div>
+              <div>Seg</div>
+              <div>Ter</div>
+              <div>Qua</div>
+              <div>Qui</div>
+              <div>Sex</div>
+              <div>Sab</div>
+            </div>
+            <div class="calendar-days">
+            </div>
           </div>
-          <div class="calendar-days">
+          <div class="calendar-footer">
           </div>
-        </div>
-        <div class="calendar-footer">
-        </div>
-        <div class="date-time-format">
-          <div class="day-text-format">HOJE</div>
-          <div class="date-time-value">
-            <div class="time-format">01:41:20</div>
-            <div class="date-format">03 - march - 2022</div>
+          <div class="date-time-format">
+            <div class="day-text-format">HOJE</div>
+            <div class="date-time-value">
+              <div class="time-format">01:41:20</div>
+              <div class="date-format">03 - march - 2022</div>
+            </div>
           </div>
+          <div class="month-list"></div>
         </div>
-        <div class="month-list"></div>
       </div>
-    </div>
-  </section>
-  <section>
-    <div class="container">
-      <h1>Cadastre o seu horário</h1>
-      <form id="cadastroForm">
-        <div class="form-group">
-          <label for="nome">Nome:</label>
-          <input type="text" class="form-control" id="nome" placeholder="Digite o nome">
-        </div>
-        <div class="form-group">
-          <label for="horario">Horário:</label>
-          <input type="text" class="form-control" id="horario" placeholder="Digite o horário">
-        </div>
-        <button type="button" class="btn btn-primary" onclick="concluirCadastro()">Concluído</button>
-      </form>
-    </div>
-  </section>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="title"><span id="title-form">Cadastrar Agendamento</span></h2>
+        <form id="formAgendamentos" class="form">
+
+            <input class="input_text" id="nome" type="text" placeholder="Nome">
+            <span style="color: rgb(13, 246, 13);" id="nomeSucess">
+            </span>
+            <span style="color: red;" id="nomeError">
+            </span>
+            <input class="input_text" id="Data" type="text"  placeholder="Data">
+            <span style="color: rgb(13, 246, 13);"  id="DataSucess">
+            </span>
+            <span style="color: red;" id="DataError">
+            </span>
+            <input class="input_text" id="HorarioInicial" type="text"  placeholder="Horario Inicial">
+            <span style="color: rgb(13, 246, 13);"  id="HorarioInicialSucess">
+            </span>
+            <span style="color: red;" id="HorarioInicialError">
+            </span>
+            <input class="input_text" id="HorarioFinal" type="text"  placeholder="Horario Final">
+            <span style="color: rgb(13, 246, 13);"  id="HorarioFinalSucess">
+            </span>
+            <span style="color: red;" id="HorarioFinalError">
+            </span>
+            <input id="btnSubmitAgendamento" class="button input_text" type="submit" disabled value="Cadastrar >">
+        </form>
+      </div>
+    </section>
+  </main>
 <script src="./assets/js/utils/Calendario.js"></script>
-
-
+<script type="module" src="./assets/js/pages/CadastrarAgendamentoPage.js"></script>
+<script src="./assets/js/utils/Navbar.js"></script>
 </body>
 </html>
-
-
-
