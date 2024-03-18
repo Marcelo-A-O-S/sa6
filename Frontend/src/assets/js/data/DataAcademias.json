@@ -1,0 +1,42 @@
+[
+    {
+        "Id":1,
+        "NomeComercial":"Academia1",
+        "CapacidadeUsuarios":14,
+        "Endereco":"Rua Dona Kita",
+        "HorarioAbertura":"06:00:00",
+        "HorarioFechamento":"16:00:00"
+    },
+    {
+        "Id":2,
+        "NomeComercial":"Academia2",
+        "CapacidadeUsuarios":18,
+        "Endereco":"Rua Dona Kita",
+        "HorarioAbertura":"06:00:00",
+        "HorarioFechamento":"16:00:00"
+    },
+    {
+        "Id":3,
+        "NomeComercial":"Academia3",
+        "CapacidadeUsuarios":19,
+        "Endereco":"Rua Dona Kita",
+        "HorarioAbertura":"06:00:00",
+        "HorarioFechamento":"16:00:00"
+    },
+    {
+        "Id":4,
+        "NomeComercial":"Academia4",
+        "CapacidadeUsuarios":18,
+        "Endereco":"Rua Dona Kita",
+        "HorarioAbertura":"06:00:00",
+        "HorarioFechamento":"16:00:00"
+    },
+    {
+        "Id":5,
+        "NomeComercial":"Academia5",
+        "CapacidadeUsuarios":18,
+        "Endereco":"Rua Dona Kita",
+        "HorarioAbertura":"06:00:00",
+        "HorarioFechamento":"16:00:00"
+    }
+]

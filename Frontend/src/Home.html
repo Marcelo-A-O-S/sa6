@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Ilicon-The-Circus-Strong-bear.16.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/home.css">
+    <title>Golden House - O melhor condomínio do Brasil</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div id="item-navbar"></div>
+            <h1>Bem-vindo ao site do condomínio Golden House</h1>
+            <h2>O melhor condomínio do Brasil</h2>
+        </header>
+        <main>
+            <section>
+                <h2>Objetivo</h2>
+                <p>Atendendo às demandas dos moradores que estavam frustrados por encontrar a academia lotada, decidimos criar um sistema de registro de horários para que os nossos moradores possam marcar seus respectivos horários na academia!</p>
+            </section>
+            <section
+                <h2>Veja os horários disponíveis👇😜</h2>
+                <p><a href="Academias.html" rel="next">Academia</a></p>
+            </section>
+        </main>
+        <footer>
+            <img src="../assets/fessor.jpg" alt="siu">
+            <P> <strong>Já sonhou com esse homem?</strong></P>
+            <audio controls>
+                <source src="caminho/do/arquivo_de_audio.mp3" type="audio/mp3">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+        </footer>
+    </div>
+    <script src="../js/utils/Navbar.js"></script>
+
+    <script>
+        window.onload = function() {
+          fetch('CriarUsuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 1');
+              }
+            })
+            .catch(error => {
+              window.location.href = 'error.html'; 
+            });
+        };
+
+        window.onload = function() {
+          fetch('page03.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 2');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academias.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 3');
+              }
+            })
+            .catch(error => {
+              
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academia.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 4');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+        window.onload = function() {
+          fetch('Index.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 5');
+              }
+            })
+            .catch(error => {
+           
+            });
+        };
+
+        window.onload = function() {
+          fetch('Usuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 6');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+      </script>
+
+</body>
+</html>

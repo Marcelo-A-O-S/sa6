@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/fonts.css" rel="stylesheet">
+    <link href="./assets/css/media.css" rel="stylesheet">
+    <title id="title-page"></title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="body dark">
+    <header id="item-navbar" class="navbar">
+    </header>
+    <main>
+        <div class="container">
+            <div class="p-4">
+                <h1 id="title-academia"></h1>
+            </div>
+            <div>
+                <button onclick="window.location.href='CriarAgendamento.html'" class="btn-custom">Adicionar agendamento</button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-light" scope="col">Nome</th>
+                        <th class="text-light" scope="col">Data</th>
+                        <th class="text-light" scope="col">Horário Inicial</th>
+                        <th class="text-light" scope="col">Horário Final</th>
+                        <th class="text-light" scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="content-agendamentos">
+                </tbody>
+            </table>
+        </div>
+        <script type="module" src="./assets/js/pages/AcademiaPage.js"></script>
+    </main>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./assets/js/utils/Navbar.js"></script>
+
+    <script>
+        window.onload = function() {
+          fetch('CriarUsuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 1');
+              }
+            })
+            .catch(error => {
+              window.location.href = 'error.html'; 
+            });
+        };
+
+        window.onload = function() {
+          fetch('page03.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 2');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academias.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 3');
+              }
+            })
+            .catch(error => {
+              
+            });
+        };
+
+        window.onload = function() {
+          fetch('Home.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 4');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+        window.onload = function() {
+          fetch('Index.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 5');
+              }
+            })
+            .catch(error => {
+           
+            });
+        };
+
+        window.onload = function() {
+          fetch('Usuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 6');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+      </script>
+    
+
+</body>
+</html>

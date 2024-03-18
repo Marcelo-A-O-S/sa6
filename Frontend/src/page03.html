@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Ilicon-The-Circus-Strong-bear.16.png" type="image/x-icon">
+    <title>Cadastro de Horários</title>
+    <!-- Adicione o CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastre o sue horário</h1>
+
+        <!-- Formulário de Cadastro -->
+        <form id="cadastroForm">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome">
+            </div>
+            
+            <div class="form-group">
+                <label for="horario">Horário:</label>
+                <input type="text" class="form-control" id="horario" placeholder="Digite o horário">
+            </div>
+            
+            
+            <button type="button" class="btn btn-primary" onclick="concluirCadastro()">Concluído</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function concluirCadastro() {
+            // Obtém os dados do formulário
+
+            var nome = document.getElementById('nome').value;
+            var horario = document.getElementById('horario').value;
+            
+
+            // Verifica qual lista está ativa (última clicada)
+            var listaAtiva = document.querySelector('.lista-ativa');
+
+            if (horario && nome && listaAtiva) {
+                // Cria um novo item de lista
+                var novoItem = document.createElement('li');
+                novoItem.className = 'list-group-item';
+                novoItem.textContent = horario + ' - ' + nome;
+
+                // Adiciona o novo item à lista ativa
+                listaAtiva.appendChild(novoItem);
+
+                // Limpa os campos do formulário
+                document.getElementById('horario').value = '';
+                document.getElementById('nome').value = '';
+            } else {
+                alert('Por favor, preencha todos os campos e selecione uma lista.');
+            }
+        }
+
+        // Função para alternar a classe "lista-ativa" entre as listas ao clicar nos botões "Adicionar"
+        document.querySelectorAll('.btn-adicionar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove a classe de todas as listas
+                document.querySelectorAll('.lista-ativa').forEach(lista => {
+                    lista.classList.remove('lista-ativa');
+                });
+                // Adiciona a classe à lista correspondente
+                var listaId = this.getAttribute('data-lista');
+                document.getElementById(listaId).classList.add('lista-ativa');
+            });
+        });
+    </script>
+    
+       <script>
+        window.onload = function() {
+          fetch('CriarUsuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 1');
+              }
+            })
+            .catch(error => {
+              window.location.href = 'error.html'; 
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academia.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 2');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+        window.onload = function() {
+          fetch('Academias.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 3');
+              }
+            })
+            .catch(error => {
+              
+            });
+        };
+
+        window.onload = function() {
+          fetch('Home.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 4');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+        window.onload = function() {
+          fetch('Index.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 5');
+              }
+            })
+            .catch(error => {
+           
+            });
+        };
+
+        window.onload = function() {
+          fetch('Usuarios.html') 
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erro na requisição 6');
+              }
+            })
+            .catch(error => {
+             
+            });
+        };
+
+
+      </script>
+</body>
+</html>
