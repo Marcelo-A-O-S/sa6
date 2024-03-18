@@ -78,8 +78,7 @@ impl TRepository<Usuario>  for UsuarioRepository{
     }
     
     async fn findById(&mut self, _id: i32) -> Result<Usuario, Error> {
-        let usuario_table = usuario;
-
+        
         let usuario_body = usuario.filter(Id.eq(_id))
         .first::<Usuario>(&mut self.conn);
         return Err(()).expect("Error")

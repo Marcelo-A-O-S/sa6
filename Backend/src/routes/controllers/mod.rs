@@ -1,4 +1,4 @@
 
 pub mod AcademiaController;
 pub mod UsuariosController;
-pub mod VIewModel;
+pub mod ViewModel;

@@ -87,6 +87,7 @@ impl TRepository<Academia> for AcademiaRepository {
     }
     
     async fn findById(&mut self, _id: i32) -> Result<Academia,Error> {
+        
         todo!()
     }
     
