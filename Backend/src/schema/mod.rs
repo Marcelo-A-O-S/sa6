@@ -12,6 +12,15 @@ diesel::table! {
         HorarioFechamento -> Time,
     }
 }
+/* pub struct Academia {
+    pub Id: i32,
+    pub NomeComercial: String,
+    pub Endereco: String,
+    pub HorarioAbertura: NaiveTime,
+    pub HorarioFechamento: NaiveTime,
+    pub CapacidadeUsuarios: i32,
+    //pub horariosagendados: HashMap<DataHora, Vec<Agendamento>>,
+} */
 
 diesel::table! {
     academiausuarios (Id) {

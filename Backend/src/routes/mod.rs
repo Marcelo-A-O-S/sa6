@@ -12,7 +12,8 @@ use controllers::UsuariosController::
     get_usuarios,
     delete_usuario,
     post_delete_usuario,
-    update_usuario
+    update_usuario,
+    delete_by_id
 };
 /* pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.service(get_academias_controller)
@@ -34,6 +35,7 @@ pub async fn app_server() -> std::io::Result<()> {
         .service(delete_usuario)
         .service(update_usuario)
         .service(post_delete_usuario)
+        .service(delete_by_id)
     })
     .bind(("127.0.0.1",8080))?
     .run();
