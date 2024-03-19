@@ -6,4 +6,5 @@ pub trait TServices<T>{
     async fn Atualizar(&mut self, _entidade: T) ->Result<(),ErrorProject>;
     async fn Listar(&mut self) -> Result<Vec<T>,ErrorProject>;
     async fn BuscarPorId(&mut self, _id: i32)->Result<T,ErrorProject>;
+    async fn DeletarPorId(&mut self,_id: i32) ->Result<(),ErrorProject>;
 }

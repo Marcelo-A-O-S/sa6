@@ -18,6 +18,19 @@ impl UsuarioRepository{
             conn: estabilishConnection()
         }
     }
+    pub async fn findByCPF(&mut self, _cpf: &String) -> Result<Usuario, Error> {
+        let result:Result<Usuario,Error> = usuario::table
+        .filter(usuario::CPF.eq(_cpf))
+        .first::<Usuario>(&mut self.conn);
+        match result {
+            Ok(usuario_result )=>{
+                return Ok(usuario_result);
+            }
+            Err(e)=>{
+                return Err(()).expect("Erro ao buscar dado");
+            }
+        }
+    }
 }
 impl TRepository<Usuario>  for UsuarioRepository{
     async fn salvar(&mut self, entidade: Usuario) ->Result<(), Error>{
@@ -78,10 +91,17 @@ impl TRepository<Usuario>  for UsuarioRepository{
     }
     
     async fn findById(&mut self, _id: i32) -> Result<Usuario, Error> {
-        
-        let usuario_body = usuario.filter(Id.eq(_id))
+        let result:Result<Usuario,Error> = usuario::table
+        .filter(usuario::Id.eq(_id))
         .first::<Usuario>(&mut self.conn);
-        return Err(()).expect("Error")
+        match result {
+            Ok(usuario_result )=>{
+                return Ok(usuario_result);
+            }
+            Err(e)=>{
+                return Err(()).expect("Erro ao buscar dado");
+            }
+        }
     }
     
     async fn deleteById(&mut self, _id:i32) -> Result<(), Error>{
@@ -94,4 +114,6 @@ impl TRepository<Usuario>  for UsuarioRepository{
             return Err(()).expect("Erro ao deletar entidade");
         }
     }
+
+    
 }

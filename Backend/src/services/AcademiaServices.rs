@@ -85,5 +85,17 @@ impl TServices<Academia> for AcademiaServices{
             }
         }
     }
+    
+    async fn DeletarPorId(&mut self,_id: i32) ->Result<(),ErrorProject> {
+        let result = self.repository.deleteById(_id).await;
+        match result{
+            Ok(())=>{
+                return Ok(());
+            }
+            Err(err)=>{
+                return Err(ErrorProject::NotFound(String::from("Erro ao atualizar no banco de dados")));
+            }
+        }
+    }
 
 }

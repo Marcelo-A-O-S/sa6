@@ -26,30 +26,49 @@ async fn get_usuarios() -> Result<HttpResponse, Error> {
 }
 #[post("/CreateUsuario")]
 async fn create_usuarios(usuarioJson: web::Json<UsuarioRequest>) -> Result<HttpResponse, Error> {
-    let usuarioBody = usuarioJson.into_inner();
+    let  usuarioBody = usuarioJson.into_inner();
     let mut usuario_services = UsuarioServices::new();
     if usuarioBody.nome != "" && usuarioBody.CPF != "" {
         let mut usuario = Usuario::new(usuarioBody.Id, usuarioBody.nome, usuarioBody.CPF);
         let result_validacao = usuario.validar_cpf();
         if result_validacao == true {
             if (usuarioBody.Id == 0) {
-                usuario_services.Salvar(usuario).await;
-                return Ok(HttpResponse::Ok().json("Usuario salvo com sucesso!"));
+               let result_exists = usuario_services.verificarExistenciaCpf(&usuario.CPF).await;
+               match result_exists{
+                    Ok(existe)=>{
+                        return Ok(HttpResponse::BadRequest().json("Erro dados inválidos"))
+                    }
+                    Err(nao_existe)=>{
+                        
+                        usuario_services.Salvar(usuario).await;
+                        return Ok(HttpResponse::Ok().json("Usuario salvo com sucesso!"));
+                    }
+               }
             } else {
                 let result_buscar = usuario_services.BuscarPorId(usuarioBody.Id).await;
                 match result_buscar {
                     Ok(busca) => {
-                        let result_atualizar = usuario_services.Salvar(usuario).await;
-                        match result_atualizar {
-                            Ok(()) => {
-                                return Ok(
-                                    HttpResponse::Ok().json("Usuario atualizado com sucesso!")
-                                );
+                        let result_exists = usuario_services.verificarExistenciaCpf(&usuario.CPF).await;
+                        match result_exists{
+                            Ok(existe)=>{
+                                let result_atualizar = usuario_services.Salvar(usuario).await;
+                                match result_atualizar {
+                                    Ok(()) => {
+                                        return Ok(
+                                            HttpResponse::Ok().json("Usuario atualizado com sucesso!")
+                                        );
+                                    }
+                                    Err(err) => {
+                                        return Ok(
+                                            (HttpResponse::BadRequest().json("Erro ao Atualizar dado"))
+                                        )
+                                    }
+                                }
                             }
-                            Err(err) => {
+                            Err(err)=>{
                                 return Ok(
-                                    (HttpResponse::BadRequest().json("Erro ao Atualizar dado"))
-                                )
+                                    (HttpResponse::BadRequest().json("Dados inválidos"))
+                                );
                             }
                         }
                     }

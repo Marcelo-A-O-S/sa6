@@ -87,8 +87,17 @@ impl TRepository<Academia> for AcademiaRepository {
     }
     
     async fn findById(&mut self, _id: i32) -> Result<Academia,Error> {
-        
-        todo!()
+        let result:Result<Academia,Error> = academia::table
+        .filter(academia::Id.eq(_id))
+        .first::<Academia>(&mut self.conn);
+        match result {
+            Ok(academia_result )=>{
+                return Ok(academia_result);
+            }
+            Err(e)=>{
+                return Err(()).expect("Erro ao buscar dado");
+            }
+        }
     }
     
     async fn deleteById(&mut self, _id:i32) -> Result<(),Error> {
