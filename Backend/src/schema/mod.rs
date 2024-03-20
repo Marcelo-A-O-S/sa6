@@ -33,8 +33,8 @@ diesel::table! {
 diesel::table! {
     agendamento (Id) {
         Id -> Integer,
-        AcademiaId -> Nullable<Integer>,
-        UsuarioId -> Nullable<Integer>,
+        AcademiaId -> Integer,
+        UsuarioId -> Integer,
         DataHoraId -> Integer,
     }
 }
