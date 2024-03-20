@@ -1,3 +1,4 @@
+
 import {InputValidation,TYPEVALIDATION} from "../utils/InputValidation.js"
 import {ApiAgendamento} from "../api/ApiAgendamento.js"
 import {FormValidation} from "../utils/FormValidation.js"
@@ -56,5 +57,3 @@ async function Initialize(){
 }
 
 document.addEventListener("DOMContentLoaded",Initialize)
-
-
