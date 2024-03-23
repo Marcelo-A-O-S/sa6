@@ -4,7 +4,7 @@ use crate::{
     services::{AcademiaServices::AcademiaServices, TServices::TServices},
 };
 use actix_web::{delete, get, post, put, web, Error, HttpResponse, Responder, Result};
-
+use super::ViewModel::RequestPathId::RequestPathId;
 #[get("/Academias")]
 pub async fn get_academias_controller() -> Result<impl Responder> {
     let mut academiaServices = AcademiaServices::new();
@@ -36,9 +36,11 @@ pub async fn create_academia(
             let result_salvar = academia_services.Salvar(academia).await;
             match result_salvar {
                 Ok(()) => {
+                    println!("Salvo");
                     return Ok(HttpResponse::Ok().json("Academia salva com sucesso!"));
                 }
                 Err(err) => {
+                    println!("Ocorreu erro");
                     return Ok(
                         HttpResponse::BadRequest().json("Ocorreu um erro ao salvar o objeto")
                     );
@@ -134,5 +136,22 @@ pub async fn delete_academia(
         }
     } else {
         return Ok(HttpResponse::Ok().json("Dados inválidos"));
+    }
+}
+/* #[get("/Academia/{Id}")]
+async get_agendamentos_by_academia_id()-> Result<HttpResponse, Error>{
+
+} */
+#[get("/AcademiaGetById/{Id}")]
+pub async fn get_academia_by_id(path : web::Path<RequestPathId>)-> Result<HttpResponse, Error>{
+    let mut academia_services = AcademiaServices::new();
+    let result_busca = academia_services.BuscarPorId(path.Id).await;
+    match result_busca {
+        Ok(academia) => {
+            return Ok(HttpResponse::Ok().json(academia));
+        }
+        Err(err) => {
+            return Ok(HttpResponse::NotFound().json("Usuario não encontrado"));
+        }
     }
 }

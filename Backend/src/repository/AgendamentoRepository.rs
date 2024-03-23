@@ -1,6 +1,7 @@
 use diesel::{table, MysqlConnection};
 use crate::entities::Agendamento::{Agendamento,NovoAgendamento};
 use super::TRepository::{TRepository};
+use crate::connection::estabilishConnection;
 use crate::schema::{agendamento, agendamento::dsl::*};
 use diesel::RunQueryDsl;
 use diesel::prelude::*;
@@ -9,8 +10,16 @@ use diesel::*;
 pub struct AgendamentoRepository{
     conn : MysqlConnection
 }
+impl AgendamentoRepository{
+    pub fn new()-> AgendamentoRepository{
+        AgendamentoRepository{
+            conn: estabilishConnection()
+        }
+    }
+}
+
 impl TRepository<Agendamento> for AgendamentoRepository{
-    async fn salvar(&mut self,entidade: Agendamento)->Result<(), diesel::result::Error> {
+    async fn salvar(&mut self,entidade: Agendamento)->Result<(), String> {
         let novagendamento = NovoAgendamento{
             AcademiaId : entidade.AcademiaId,
             DataHoraId : entidade.DataHoraId,
@@ -22,11 +31,11 @@ impl TRepository<Agendamento> for AgendamentoRepository{
         if result.is_ok(){
             return Ok(())
         }else{
-            return Err(()).expect("Error ao salvar entidade")
+            return Err(String::from("Error ao salvar entidade"))
         }
     }
 
-    async fn listar(&mut self) -> Result<Vec<Agendamento>, diesel::result::Error> {
+    async fn listar(&mut self) -> Result<Vec<Agendamento>, String> {
         let mut agendamento_table = agendamento::table;
         let mut lista_agendamento: Vec<Agendamento> = Vec::new();
         match agendamento_table.load::<Agendamento>(&mut self.conn){
@@ -39,17 +48,16 @@ impl TRepository<Agendamento> for AgendamentoRepository{
                         UsuarioId : agendamento_item.DataHoraId
                     };
                     lista_agendamento.push(agendamento_);
-                    return Ok(lista_agendamento);
                 }
+                return Ok(lista_agendamento);
             }
             Err(err)=>{
-                return Err(()).expect("Erro ao listar dados");
+                return Err(String::from("Erro ao listar dados"));
             }
         }
-        todo!()
     }
 
-    async fn update(&mut self,entidade: Agendamento)->Result<(), diesel::result::Error> {
+    async fn update(&mut self,entidade: Agendamento)->Result<(), String> {
         let result = update(agendamento)
         .set((
             AcademiaId.eq(entidade.AcademiaId),
@@ -58,43 +66,59 @@ impl TRepository<Agendamento> for AgendamentoRepository{
         ))
         .filter(Id.eq(entidade.Id))
         .execute(&mut self.conn);
-    if result.is_ok() {
-        Ok(())
-    } else {
-        Err(NotFound)
-    }
+        if result.is_ok() {
+            Ok(())
+        } else {
+            Err(String::from("Erro ao atualizar dado"))
+        }
     }
 
-    async fn delete(&mut self,entidade: Agendamento)->Result<(), diesel::result::Error> {
+    async fn delete(&mut self,entidade: Agendamento)->Result<(), String> {
         let result = delete(agendamento)
         .filter(Id.eq(entidade.Id))
         .execute(&mut self.conn);
-    if result.is_ok() {
-        Ok(())
-    } else {
-        Err(()).expect("Error ao deletar entidade")
-    }
+        if result.is_ok() {
+            Ok(())
+        } else {
+            Err(String::from("Error ao deletar entidade"))
+        }
     }
 
-    async fn deleteById(&mut self, _id:i32)->Result<(), diesel::result::Error> {
+    async fn deleteById(&mut self, _id:i32)->Result<(), String> {
         let result = delete(agendamento).filter(Id.eq(_id)).execute(&mut self.conn);
         if result.is_ok() {
             Ok(())
         } else {
-            Err(()).expect("Error ao deletar entidade")
+            Err(String::from("Error ao deletar entidade"))
         }
     }
 
-    async fn findById(&mut self, _id: i32) ->Result<Agendamento, diesel::result::Error> {
+    async fn findById(&mut self, _id: i32) ->Result<Agendamento, String> {
         let result: Result<Agendamento, Error> = agendamento::table
             .filter(agendamento::Id.eq(_id))
             .first::<Agendamento>(&mut self.conn);
-        match result {
-            Ok(academia_result) => {
-                return Ok(academia_result);
+            match result {
+                Ok(academia_result) => {
+                    return Ok(academia_result);
+                }
+                Err(e) => {
+                    return Err(String::from("Erro ao buscar dado"));
+                }
             }
-            Err(e) => {
-                return Err(()).expect("Erro ao buscar dado");
+    }
+    
+    async fn findLastId(&mut self) ->Result<Agendamento,String> {
+        let result = agendamento
+        .select(agendamento::all_columns)
+        .order(Id.desc())
+        .limit(1)
+        .first::<Agendamento>(&mut self.conn);
+        match result {
+            Ok(agendamento_body)=>{
+                return Ok(agendamento_body)
+            }
+            Err(err)=>{
+                return Err(String::from("Erro nesse baguio"))
             }
         }
     }

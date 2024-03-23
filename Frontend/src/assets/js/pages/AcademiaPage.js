@@ -1,15 +1,24 @@
 
 import {ApiAgendamento} from "../api/ApiAgendamento.js"
+import {ApiAcademias} from "../api/ApiAcademias.js"
 const params = new URLSearchParams(window.location.search);
 const NomeComercial = params.get("NomeComercial");
-console.log(NomeComercial);
-document.getElementById("title-page").innerHTML = NomeComercial;
-document.getElementById("title-academia").innerText = NomeComercial;
+const AcademiaId = params.get("Id");
+
 const contentPageAgendamentos = document.getElementById("content-agendamentos")
 async function LoadAgendamentos(){
     let Agendamentos;
     let contentAgendamentos;
+    let academia;
+    const apiAcademia = new ApiAcademias();
     const apiAgendamentos = new ApiAgendamento();
+    academia = await apiAcademia.getAcademiaById(parseInt(AcademiaId))
+    if(academia != undefined){
+        if(academia.Id != undefined){
+            document.getElementById("title-page").innerHTML = academia.NomeComercial;
+            document.getElementById("title-academia").innerText = academia.NomeComercial;
+        }
+    }
     Agendamentos = await apiAgendamentos.getAgendamentos();
     contentAgendamentos = Agendamentos.map((item)=>{
         return(

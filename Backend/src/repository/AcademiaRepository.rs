@@ -3,7 +3,7 @@ use crate::connection::estabilishConnection;
 use crate::entities::Academia::{Academia, NovaAcademia};
 use crate::schema::academiausuarios::AcademiaId;
 use crate::schema::{academia, academia::dsl::*};
-use actix_web::web::Data;
+
 use diesel::prelude::*;
 use diesel::result::Error;
 use diesel::RunQueryDsl;
@@ -18,8 +18,9 @@ impl AcademiaRepository {
         }
     }
 }
+
 impl TRepository<Academia> for AcademiaRepository {
-    async fn salvar(&mut self, entidade: Academia) -> Result<(), Error> {
+    async fn salvar(&mut self, entidade: Academia) -> Result<(), String> {
         let nova_academia = NovaAcademia {
             NomeComercial: entidade.NomeComercial,
             CapacidadeUsuarios: entidade.CapacidadeUsuarios,
@@ -33,11 +34,11 @@ impl TRepository<Academia> for AcademiaRepository {
         if result.is_ok() {
             Ok(())
         } else {
-            Err(()).expect("Error ao salvar entidade")
+            Err(String::from("Error ao salvar entidade"))
         }
     }
 
-    async fn listar(&mut self) -> Result<Vec<Academia>, Error> {
+    async fn listar(&mut self) -> Result<Vec<Academia>, String> {
         let academia_table = academia;
         let mut listaAcademias: Vec<Academia> = Vec::new();
         match academia_table.load::<Academia>(&mut self.conn) {
@@ -57,12 +58,12 @@ impl TRepository<Academia> for AcademiaRepository {
             }
             Err(err) => {
                 println!("Ocorreu o seguinte erro: {}!", err);
-                return Err(()).expect("Erro ao puxar informações");
+                return Err(String::from("Erro ao puxar informações"))
             }
         }
     }
 
-    async fn update(&mut self, entidade: Academia) -> Result<(), Error> {
+    async fn update(&mut self, entidade: Academia) -> Result<(), String> {
         let result = update(academia)
             .set((
                 NomeComercial.eq(entidade.NomeComercial),
@@ -76,22 +77,22 @@ impl TRepository<Academia> for AcademiaRepository {
         if result.is_ok() {
             Ok(())
         } else {
-            Err(NotFound)
+            Err(String::from("Erro ao atualizar o dado"))
         }
     }
 
-    async fn delete(&mut self, entidade: Academia) -> Result<(), Error> {
+    async fn delete(&mut self, entidade: Academia) -> Result<(), String> {
         let result = delete(academia)
             .filter(Id.eq(entidade.Id))
             .execute(&mut self.conn);
         if result.is_ok() {
             Ok(())
         } else {
-            Err(()).expect("Error ao deletar entidade")
+            Err(String::from("Error ao deletar entidade"))
         }
     }
 
-    async fn findById(&mut self, _id: i32) -> Result<Academia, Error> {
+    async fn findById(&mut self, _id: i32) -> Result<Academia, String> {
         let result: Result<Academia, Error> = academia::table
             .filter(academia::Id.eq(_id))
             .first::<Academia>(&mut self.conn);
@@ -100,17 +101,33 @@ impl TRepository<Academia> for AcademiaRepository {
                 return Ok(academia_result);
             }
             Err(e) => {
-                return Err(()).expect("Erro ao buscar dado");
+                return Err(String::from("Erro ao buscar dado"));
             }
         }
     }
 
-    async fn deleteById(&mut self, _id: i32) -> Result<(), Error> {
+    async fn deleteById(&mut self, _id: i32) -> Result<(), String> {
         let result = delete(academia).filter(Id.eq(_id)).execute(&mut self.conn);
         if result.is_ok() {
             Ok(())
         } else {
-            Err(()).expect("Error ao deletar entidade")
+            Err(String::from("Error ao deletar entidade"))
+        }
+    }
+    
+    async fn findLastId(&mut self) ->Result<Academia,String> {
+        let result = academia
+        .select(academia::all_columns)
+        .order(Id.desc())
+        .limit(1)
+        .first::<Academia>(&mut self.conn);
+        match result {
+            Ok(academia_body)=>{
+                return Ok(academia_body)
+            }
+            Err(err)=>{
+                return Err(String::from("Erro nesse baguio"))
+            }
         }
     }
 }

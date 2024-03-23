@@ -4,6 +4,7 @@ use crate::{
 };
 use actix_web::{delete, get, post, put, web, web::*, Error, HttpResponse, Responder, Result};
 use serde::{Deserialize, Serialize};
+use super::ViewModel::RequestPathId::RequestPathId;
 use std::sync::{Arc, Mutex};
 #[derive(Deserialize, Serialize)]
 struct UsuarioRequest {
@@ -11,10 +12,7 @@ struct UsuarioRequest {
     nome: String,
     CPF: String,
 }
-#[derive(Deserialize)]
-struct UsuarioPathId {
-    Id: i32,
-}
+
 #[get("/Usuarios")]
 async fn get_usuarios() -> Result<HttpResponse, Error> {
     let mut usuarioServices = UsuarioServices::new();
@@ -34,16 +32,13 @@ async fn create_usuarios(usuarioJson: web::Json<UsuarioRequest>) -> Result<HttpR
         if result_validacao == true {
             if (usuarioBody.Id == 0) {
                let result_exists = usuario_services.verificarExistenciaCpf(&usuario.CPF).await;
-               match result_exists{
-                    Ok(existe)=>{
-                        return Ok(HttpResponse::BadRequest().json("Erro dados inválidos"))
-                    }
-                    Err(nao_existe)=>{
-                        
-                        usuario_services.Salvar(usuario).await;
-                        return Ok(HttpResponse::Ok().json("Usuario salvo com sucesso!"));
-                    }
+               if result_exists.unwrap() {
+                    return Ok(HttpResponse::BadRequest().json("Erro dados inválidos"))
+               }else{
+                    usuario_services.Salvar(usuario).await;
+                    return Ok(HttpResponse::Ok().json("Usuario salvo com sucesso!"));
                }
+               
             } else {
                 let result_buscar = usuario_services.BuscarPorId(usuarioBody.Id).await;
                 match result_buscar {
@@ -160,7 +155,7 @@ async fn post_delete_usuario(
     return Ok((HttpResponse::BadRequest().json("Campos inválidos")));
 }
 #[delete("/DeleteById/{Id}")]
-async fn delete_by_id(param_path: web::Path<UsuarioPathId>) -> Result<HttpResponse, Error> {
+async fn delete_by_id(param_path: web::Path<RequestPathId>) -> Result<HttpResponse, Error> {
     let mut usuario_services = UsuarioServices::new();
     let result_busca = usuario_services.BuscarPorId(param_path.Id).await;
     match result_busca {
@@ -182,8 +177,8 @@ async fn delete_by_id(param_path: web::Path<UsuarioPathId>) -> Result<HttpRespon
         }
     }
 }
-#[get("/GetById/{id}")]
-async fn get_by_id(param_path: web::Path<UsuarioPathId>) -> Result<HttpResponse, Error> {
+#[get("/UsuarioGetById/{Id}")]
+async fn get_by_id(param_path: web::Path<RequestPathId>) -> Result<HttpResponse, Error> {
     let mut usuario_services = UsuarioServices::new();
     let result_busca = usuario_services.BuscarPorId(param_path.Id).await;
     match result_busca {

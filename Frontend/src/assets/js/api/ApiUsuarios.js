@@ -12,17 +12,34 @@ export class ApiUsuarios {
     }
     async createUsuarios(usuario) {
         console.log(JSON.stringify(usuario))
-        await fetch("http://localhost:8080/CreateUsuario", {
+        return await fetch("http://localhost:8080/CreateUsuario", {
             body: JSON.stringify(usuario),
             method: 'POST',
-            mode: "no-cors",
+            mode: "cors",
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => response.json())
-            .then((data) => { console.log(data) })
+            .then((data) => { 
+                return data
+             })
             .catch((err) => {
-                console.log(err)
+                return err
             })
+    }
+    async getUsuarioById(Id){
+        return await fetch(`http://localhost:8080/UsuarioGetById/${Id}`, {
+            method: "GET"
+        })
+        .then((response) =>  response.json())
+        .then((data) => { return data});
+            
+    }
+    async deleteUsuarioById(Id){
+        return await fetch(`http://localhost:8080/DeleteById/${Id}`, {
+            method: "DELETE"
+        })
+        .then((response) =>  response.json())
+        .then((data) => { return data});
     }
 }

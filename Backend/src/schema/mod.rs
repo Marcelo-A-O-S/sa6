@@ -42,9 +42,10 @@ diesel::table! {
 diesel::table! {
     datahora (Id) {
         Id -> Integer,
-        AgendamentoId -> Integer,
+        //AgendamentoId -> Integer,
         Ano -> Integer,
         Mes -> Integer,
+        Dia -> Integer,
         Hora -> Time,
     }
 }

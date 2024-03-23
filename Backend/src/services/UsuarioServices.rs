@@ -15,15 +15,10 @@ impl UsuarioServices {
     }
     pub async fn verificarExistenciaCpf(&mut self, mut _cpf: &String) -> Result<bool, bool> {
         let result = self.repository.findByCPF(_cpf).await;
-        match result{
-            Ok(usuario)=>{
-                return Ok(true)
-            }
-            Err(err)=>{
-                return Ok(false)
-                
-            }
-
+        if result.is_ok() == true {
+            return Ok(true)
+        }else{
+            return Ok(false)
         }
     }
     pub async fn BuscarPorCpf(&mut self, mut _cpf: &String) -> Result<Usuario, ErrorProject> {
