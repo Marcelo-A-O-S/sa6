@@ -1,4 +1,5 @@
 use super::TServices::TServices;
+use crate::entities::Usuarios::Usuario;
 use crate::entities::{
     Academia::Academia,
     Agendamento::Agendamento,
@@ -7,43 +8,123 @@ use crate::entities::{
 use crate::repository::{
     AcademiaRepository::AcademiaRepository,
     AgendamentoRepository::AgendamentoRepository,
-    DataHoraRepository::DataHoraRepository
+    DataHoraRepository::DataHoraRepository,
+    UsuariosRepository::UsuarioRepository
 };
 use crate::repository::TRepository::TRepository;
 use crate::utils::Errors::{ErrorProject};
 pub struct AcademiaServices{
     repository_academia:AcademiaRepository,
     repository_agendamento: AgendamentoRepository,
-    repository_dh: DataHoraRepository
+    repository_dh: DataHoraRepository,
+    repository_user: UsuarioRepository
 }
 impl AcademiaServices{
     pub fn new()-> AcademiaServices{
         AcademiaServices{
             repository_academia: AcademiaRepository::new(),
             repository_agendamento: AgendamentoRepository::new(),
-            repository_dh: DataHoraRepository::new()
+            repository_dh: DataHoraRepository::new(),
+            repository_user: UsuarioRepository::new()
         }
     }
-   /*  pub async fn SalvarAgendamento(&mut self, _academiaId: i32, entidade_agendamento : Agendamento, entidade_dh: DataHora ) -> Result<(), ErrorProject>{
-        let save_dh = self.repository_dh.salvar(entidade_dh).await;
-        match save_dh{
-             Ok(())=>{
-                let result_dh = self.repository_dh.findLastId().await;
-                match result_dh {
-                    Ok(datahora_return)=>{
-                        
+    pub async fn deletar_agendamento_by_id(&mut self, agendamento_id:i32)->Result<(), ErrorProject>{
+        let mut result_busca = self.repository_agendamento.findById(agendamento_id).await;
+        match result_busca {
+            Ok(agendamento)=>{
+                let result_delete =  self.repository_agendamento.deleteById(agendamento.Id).await;
+                match result_delete{
+                    Ok(())=>{
+                        return Ok(());
                     }
                     Err(err)=>{
-
+                        return Err(ErrorProject::ErrorUpdateDB(err))
                     }
                 }
-             }
-             Err(err)=>{
-                return Err(ErrorProject::ErrorGeneric(String::from("Cu doce")))
-             }
+            }
+            Err(err)=>{
+                return Err(ErrorProject::NotFound(err))
+            }
+        }
+    }
+    pub async fn atualizar_agendamento(&mut self, agendamento_id:i32, entidade_dh:DataHora, academia_id: i32, usuario_id:i32) -> Result<(), ErrorProject>{
+        let update_dh = self.repository_dh.update(entidade_dh).await;
+        match update_dh{
+            Ok(())=>{
+
+                let mut agendamento = self.repository_agendamento.findById(agendamento_id).await.unwrap();
+                agendamento.AcademiaId = academia_id;
+                agendamento.DataHoraId = entidade_dh.Id;
+                agendamento.UsuarioId = usuario_id;
+                self.repository_agendamento.update(agendamento).await;
+                return Ok(());
+            }
+            Err(err)=>{
+                return Err(ErrorProject::ErrorUpdateDB(err))
+            }
+        }
+    }
+    pub async fn salvar_agendamento(&mut self, _academia_id: i32, usuario_id : i32, entidade_dh: DataHora ) -> Result<(), ErrorProject>{
+        let save_dh = self.repository_dh.salvar(entidade_dh).await;
+        if save_dh.is_ok(){
+            let result_find = self.repository_dh.findLastId().await;
+            match result_find{
+                Ok(data)=>{
+                    let agendamento = Agendamento{
+                        AcademiaId: _academia_id,
+                        DataHoraId: data.Id,
+                        UsuarioId: usuario_id,
+                        Id: 0
+                    };
+                    let save_agendamento = self.repository_agendamento.salvar(agendamento).await;
+                    if save_agendamento.is_ok(){
+                        return Ok(());
+                    }else{
+                        return Err(ErrorProject::ErrorUpdateDB(String::from("Erro ao salvar entidade")));
+                    }
+                }
+                Err(err)=>{
+                    return Err(ErrorProject::ErrorUpdateDB(err));
+                }
+            }
+        }else{
+            return Err(ErrorProject::ErrorUpdateDB(String::from("Erro ao salvar data")));
         }
        
-    } */
+    }
+    pub async fn buscar_agendamentos_por_academiaid(&mut self, academia_id: i32)-> Result<Vec<Agendamento>, ErrorProject>{
+        let result_busca = self.repository_agendamento.get_by_academia_id(academia_id).await;
+        match result_busca {
+            Ok(agendamentos)=>{
+               return Ok(agendamentos);
+            }
+            Err(err)=>{
+                return Err(ErrorProject::ErrorUpdateDB(err));
+            }
+        }
+    }
+    pub async fn buscar_dh_por_id(&mut self, dh_id: i32)-> Result<DataHora, ErrorProject>{
+        let result_busca = self.repository_dh.findById(dh_id).await;
+        match result_busca{
+            Ok(dh)=>{
+                return Ok(dh);
+            }
+            Err(err)=>{
+                return Err(ErrorProject::ErrorUpdateDB(err))
+            }
+        }
+    }
+    pub async fn buscar_agendamento_por_Id(&mut self, agendamento_id: i32)-> Result<Agendamento, ErrorProject>{
+        let mut result_busca = self.repository_agendamento.findById(agendamento_id).await;
+        match result_busca{
+            Ok(agendamento) =>{
+                return Ok(agendamento);
+            }
+            Err(err)=>{
+                return Err(ErrorProject::ErrorUpdateDB(err));
+            }
+        }
+    }
 }
 impl TServices<Academia> for AcademiaServices{
     async fn Salvar(&mut self, entidade :Academia)-> Result<(),ErrorProject> {

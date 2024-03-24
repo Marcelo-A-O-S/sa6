@@ -16,6 +16,19 @@ impl AgendamentoRepository{
             conn: estabilishConnection()
         }
     }
+    pub async fn get_by_academia_id(&mut self, academia_id: i32)->Result<Vec<Agendamento>, String>{
+        let result: Result<Vec<Agendamento>, Error> = agendamento::table.select(agendamento::all_columns)
+        .filter(agendamento::AcademiaId.eq(academia_id))
+        .get_results(&mut self.conn);
+        match result {
+            Ok(agendamentos)=>{
+                return Ok(agendamentos);
+            }
+            Err(err)=>{
+                return Err(String::from("Erro ao buscar dados"));
+            }
+        }
+    }
 }
 
 impl TRepository<Agendamento> for AgendamentoRepository{
@@ -25,13 +38,17 @@ impl TRepository<Agendamento> for AgendamentoRepository{
             DataHoraId : entidade.DataHoraId,
             UsuarioId : entidade.UsuarioId
         };
-        let result = diesel::insert_into(agendamento::table)
+        let mut result = diesel::insert_into(agendamento::table)
             .values(&novagendamento)
             .execute(&mut self.conn);
-        if result.is_ok(){
-            return Ok(())
-        }else{
-            return Err(String::from("Error ao salvar entidade"))
+        match result {
+            Ok(rows)=>{
+                return Ok(());
+            }
+            Err(err)=>{
+                println!("{:?}", err);
+                return Err(String::from("Erro ao salvar dados"));
+            }
         }
     }
 

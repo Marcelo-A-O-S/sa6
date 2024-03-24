@@ -2,7 +2,7 @@
 use serde::{Serialize,Deserialize};
 use diesel::*;
 use crate::schema::{usuario};
-#[derive(Queryable, Selectable,Identifiable, PartialEq, Serialize, Debug, Clone)]
+#[derive(Queryable, Selectable,Identifiable, PartialEq, Serialize,Deserialize, Debug, Clone)]
 #[diesel(table_name = usuario)]
 #[diesel(primary_key(Id))]
 pub struct Usuario {

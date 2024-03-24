@@ -17,12 +17,13 @@ body{
     color:white;
 }
 .body{
-
-    color: white;
     font-family: poppinsregular;
     max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
+}
+.input_text{
+    color:black;
 }
 .navbar{
     display: flex;
@@ -96,13 +97,14 @@ form{
     display: flex;
     flex-direction: column;
     width: 70%;
+    color:black;
 }
 
 form [type="submit"]{
     height: 50px;
     width: 50%;
     background-color: rgb(132, 14, 201);
-    color: white;
+    color:black;
     font-weight: bold;
 }
 .btn-custom{
@@ -117,6 +119,9 @@ form [type="submit"]{
 form [type="submit"]:hover{
     cursor: pointer;
 }
+form [type="button"]:hover{
+    cursor: pointer;
+}
 
 input{
     margin-top: 20px;
@@ -125,6 +130,8 @@ input{
     border-radius: 20px;
     border: none;
     font-size: 15px;
+    background-color: rgb(212, 255, 255);
+    color: rgb(227, 217, 217);
 }
 .academia-item{
     border: 1px solid white;

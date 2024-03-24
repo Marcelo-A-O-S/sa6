@@ -21,4 +21,10 @@ export class ApiAcademias{
         .then((response)=> response.json())
         .then((data) => {return data})
     }
+    async getAgendamentosByAcademiaId(academiaId){
+        return await fetch(`http://localhost:8080/GetAgendamentosByAcademiaId/${academiaId}`)
+        .then((response)=> response.json())
+        .then((data) => {return data})
+    }
+    
 }

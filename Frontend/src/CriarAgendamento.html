@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,9 +9,10 @@
     <link href="./assets/css/style.css" rel="stylesheet">
     <link href="./assets/css/fonts.css" rel="stylesheet">
     <link href="./assets/css/media.css" rel="stylesheet">
+    <link href="./assets/css/modal.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/calendario.css">
-    <script src="script.js" defer></script>
-    <title>Cadastrar agendamento</title>
+
+    <title id="title-page">Cadastrar agendamento</title>
 </head>
 <body class="body dark">
   <header id="item-navbar" class="navbar">
@@ -62,8 +63,27 @@
       <div class="container">
         <h2 class="title"><span id="title-form">Cadastrar Agendamento</span></h2>
         <form id="formAgendamentos" class="form">
-
-            <input class="input_text" id="nome" type="text" placeholder="Nome">
+            <dialog id="ModalUsuarios" class="modal" >
+              <div class="header">
+                <button id="btnCloseModal" autofocus>X</button>
+              </div>
+              <div id="content-usuario" class="body">
+                <!-- <div class="item">
+                  <input id="checkbox" type="checkbox"/>
+                  <label for="checkbox" class="usuario-item">
+                    <p>Nome: Teste</p>
+                    <p>Cpf: teste</p>
+                  </label>
+                </div> -->
+              </div>
+              <div class="footer">
+                <button id="btnSelectUsuario" class="btn-custom" type="button">Selecionar Usuário</button>
+              </div>
+            </dialog>
+            <div class="d-flex" width="100%">
+              <input class="input_text" id="nome" disabled style="background-color: azure; color:black;" type="text" placeholder="Nome">
+              <button id="btnBuscarUsuario" class="btn-custom" type="button">Buscar Usuário</button>
+            </div>
             <span style="color: rgb(13, 246, 13);" id="nomeSucess">
             </span>
             <span style="color: red;" id="nomeError">

@@ -6,7 +6,8 @@ use chrono::DateTime;
 use chrono::Timelike;
 use chrono::Datelike;
 use chrono::NaiveTime;
-#[derive(Debug, Identifiable, Queryable,  Clone)]
+use serde::{Deserialize, Serialize};
+#[derive(Debug, Identifiable, Queryable,  Clone,Copy,  Deserialize, Serialize)]
 #[diesel(table_name = datahora)]
 #[diesel(primary_key(Id))]
     pub struct DataHora {
@@ -14,7 +15,8 @@ use chrono::NaiveTime;
         pub Ano: i32,
         pub Mes: i32,
         pub Dia: i32,
-        pub Hora: NaiveTime,
+        pub HoraInicial: NaiveTime,
+        pub HoraFechamento: NaiveTime
     }
 #[derive(Insertable)]
 #[diesel(table_name = datahora)]
@@ -22,17 +24,19 @@ use chrono::NaiveTime;
         pub Ano: i32,
         pub Mes: i32,
         pub Dia: i32,
-        pub Hora: NaiveTime,
+        pub HoraInicial: NaiveTime,
+        pub HoraFechamento: NaiveTime
     }
 
     impl DataHora {
-        pub fn new(id:i32,ano: i32, mes: i32, dia: i32, hora: NaiveTime) -> Self {
+        pub fn new(id:i32,ano: i32, mes: i32, dia: i32, horainicial: NaiveTime, horafechamento: NaiveTime) -> Self {
             let obj: DataHora = DataHora {
                 Id: id,
                 Ano: ano,
                 Mes: mes,
                 Dia: dia,
-                Hora: hora,
+                HoraInicial: horainicial,
+                HoraFechamento: horafechamento
             };
             obj.validar_data();
             obj
@@ -90,7 +94,7 @@ use chrono::NaiveTime;
                 false
             } else if self.Dia < dia || mesmarcado == mes || self.Ano == ano {
                 false
-            } else if self.Hora < hora || self.Dia == dia {
+            } else if self.HoraInicial < hora || self.Dia == dia {
                 false
             } else {
                 true

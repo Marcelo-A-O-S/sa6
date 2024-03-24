@@ -23,7 +23,8 @@ impl TRepository<DataHora> for DataHoraRepository {
         let novadatahora = NovaDataHora{
             Ano : entidade.Ano,
             Dia: entidade.Dia,
-            Hora: entidade.Hora,
+            HoraInicial: entidade.HoraInicial,
+            HoraFechamento: entidade.HoraFechamento,
             Mes: entidade.Mes
         };
         let result = diesel::insert_into(datahora::table)
@@ -46,7 +47,8 @@ impl TRepository<DataHora> for DataHoraRepository {
                         Id: datahora_item.Id,
                         Ano: datahora_item.Ano,
                         Dia: datahora_item.Dia,
-                        Hora: datahora_item.Hora,
+                        HoraInicial: datahora_item.HoraInicial,
+                        HoraFechamento: datahora_item.HoraFechamento,
                         Mes: datahora_item.Mes,
                     };
                     lista_datahora.push(datahora_);
@@ -59,13 +61,14 @@ impl TRepository<DataHora> for DataHoraRepository {
         }
     }
 
-    async fn update(&mut self,entidade: DataHora)->Result<(), String> {
+    async fn update(&mut self, entidade: DataHora)->Result<(), String> {
         let result = update(datahora)
         .set((
             Ano.eq(entidade.Ano),
             Mes.eq(entidade.Mes),
             Dia.eq(entidade.Dia),
-            Hora.eq(entidade.Hora)
+            HoraInicial.eq(entidade.HoraInicial),
+            HoraFechamento.eq(entidade.HoraFechamento),
         ))
         .filter(Id.eq(entidade.Id))
         .execute(&mut self.conn);

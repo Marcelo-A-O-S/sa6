@@ -4,7 +4,9 @@ create table datahora(
 Id int not null primary key auto_increment,
 Ano int not null,
 Mes int not null,
-Hora time not null
+Dia int not null,
+HoraInicial time not null,
+HoraFechamento time not null
 );
 create table usuario(
 Id int not null primary key auto_increment,
@@ -32,8 +34,8 @@ create table agendamento(
 Id int primary key auto_increment not null,
 AcademiaId int not null,
 UsuarioId int not null,
-DataHora int not null,
+DataHoraId int not null,
 foreign key(AcademiaId) references teste.academia(Id) on update cascade on delete cascade,
 foreign key(UsuarioId) references teste.usuario(Id) on update cascade on delete cascade,
-foreign key(DataHora) references teste.datahora(Id) on update cascade on delete cascade
+foreign key(DataHoraId) references teste.datahora(Id) on update cascade on delete cascade
 );

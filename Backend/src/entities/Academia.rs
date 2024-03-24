@@ -2,9 +2,9 @@ use super::Agendamento::Agendamento;
 use crate::schema::academia;
 use chrono::NaiveTime;
 use diesel::*;
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 
-#[derive(Queryable, Identifiable, Serialize, PartialEq, Debug, Clone)]
+#[derive(Queryable, Identifiable, Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[diesel(table_name = academia)]
 #[diesel(primary_key(Id))]
 pub struct Academia {

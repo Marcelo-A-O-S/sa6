@@ -26,6 +26,10 @@ export class InputValidation{
         this.inputIdDOM.value = value;
         this.inputIdDOM.dispatchEvent(event)
     }
+    async UpdateFields(){
+        const event = new Event("input");
+        this.inputIdDOM.dispatchEvent(event)
+    }
     getValue(){
         return this.inputIdDOM.value;
     }

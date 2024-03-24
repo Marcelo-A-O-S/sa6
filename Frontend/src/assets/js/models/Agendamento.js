@@ -1,14 +1,16 @@
 export class Agendamento{
+    Id;
     UsuarioId;
     AcademiaId;
     Data;
     HorarioInicial;
-    HorarioFinal;
+    HorarioFechamento;
     constructor(){
+        this.Id = 0;
         this.AcademiaId = 0;
         this.UsuarioId = 0;
         this.Data = new Date();
         this.HorarioInicial = "";
-        this.HorarioFinal = "";
+        this.HorarioFechamento = "";
     }
 }

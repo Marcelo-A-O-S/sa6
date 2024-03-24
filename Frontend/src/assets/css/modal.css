@@ -1,0 +1,53 @@
+.modal{
+    background-color: white;
+    width: 60%;
+    height: 300px;
+    border-radius: 12px;
+    top:40%;
+    left: 20%;
+    padding: 4px;
+    
+}
+.modal .header{
+    display: flex;
+
+}
+.modal .header #btnCloseModal{
+    background-color: red;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.modal .body {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    width: 100%;
+    gap:5px;
+}
+.modal .body .usuario-item{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    height: 50px;
+    padding: 12px;
+    justify-content: space-around;
+    cursor:pointer
+}
+.modal .body .item {
+
+}
+.radio{
+    display: none;
+}
+.usuario-item label{
+
+}
+ .radio:checked + .usuario-item{
+    
+    border: 2px solid violet ;
+}
+

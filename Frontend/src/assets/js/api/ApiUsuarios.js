@@ -2,13 +2,12 @@ import { Usuario } from "../models/Usuario.js"
 
 export class ApiUsuarios {
     async getUsuarios() {
-        let Usuarios = await fetch("http://localhost:8080/Usuarios", {
+        return await fetch("http://localhost:8080/Usuarios", {
             method: "GET"
         })
-            .then((response) => {
-                return response.json()
-            });
-        return Usuarios;
+        .then((response) =>  response.json())
+        .then((data)=> {return data});
+       
     }
     async createUsuarios(usuario) {
         console.log(JSON.stringify(usuario))
@@ -32,7 +31,9 @@ export class ApiUsuarios {
             method: "GET"
         })
         .then((response) =>  response.json())
-        .then((data) => { return data});
+        .then((data) => { 
+            return data
+        });
             
     }
     async deleteUsuarioById(Id){
