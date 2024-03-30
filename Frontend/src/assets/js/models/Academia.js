@@ -1,3 +1,8 @@
+const Mes = {
+    JANEIRO:"janeiro",
+    
+}
+
 export class Academia{
     CapacidadeUsuarios;
     NomeComercial;

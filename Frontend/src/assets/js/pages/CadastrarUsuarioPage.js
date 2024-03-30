@@ -23,8 +23,8 @@ async function LoadUsuario(){
         let usuarios = [];
         let usuario;
         const apiUsuarios = new ApiUsuarios();
-        usuarios = await apiUsuarios.getUsuarios();
-        usuario = usuarios.find(x=> x.Id == usuarioId);
+        usuario = await apiUsuarios.getUsuarioById(parseInt(usuarioId));
+        console.log(usuario)
         inputId.setValue(usuario.Id)
         inputNome.setValue(usuario.nome);
         inputCPF.setValue(usuario.CPF);
@@ -32,12 +32,21 @@ async function LoadUsuario(){
         inputId.setValue(0);
     }
 }
-formSubmit.onSubmit(()=>{
+formSubmit.onSubmit(async ()=>{
+    let response;
+    const apiUsuarios = new ApiUsuarios();
     const usuario = new Usuario();
-    usuario.Id = inputId.getValue();
+    usuario.Id = parseInt(inputId.getValue());
     usuario.CPF = inputCPF.getValue();
     usuario.nome = inputNome.getValue();
-    console.log(usuario)
+    console.log(usuario);
+    try{
+        response = await apiUsuarios.createUsuarios(usuario);
+        console.log("Response :", response);
+        alert(response)
+    }catch(err){
+        console.log(err)
+    }
 
 })
 document.addEventListener('DOMContentLoaded',LoadUsuario)

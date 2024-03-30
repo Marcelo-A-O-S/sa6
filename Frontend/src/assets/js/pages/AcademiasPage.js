@@ -17,7 +17,7 @@ async function loadAcademias(){
                 <ul id="academy1List" class="list-group">
                 </ul>
                 <div>
-                    <button onclick="window.location.href='Academia.html?NomeComercial=${item.NomeComercial}'" class="btn-custom">Entrar</button>
+                    <button onclick="window.location.href='Academia.html?Id=${item.Id}'" class="btn-custom">Entrar</button>
                 </div>
             </div>
             <hr>

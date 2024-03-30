@@ -1,9 +1,46 @@
-export class ApiUsuarios{
-    async getUsuarios(){
-        let Usuarios = await fetch("https://marcelo-a-o-s.github.io/sa6/assets/js/data/DataUsuarios.json")
-        .then((response)=>{
-            return response.json();
+import { Usuario } from "../models/Usuario.js"
+
+export class ApiUsuarios {
+    async getUsuarios() {
+        return await fetch("http://localhost:8080/Usuarios", {
+            method: "GET"
         })
-        return Usuarios;
+        .then((response) =>  response.json())
+        .then((data)=> {return data});
+       
+    }
+    async createUsuarios(usuario) {
+        console.log(JSON.stringify(usuario))
+        return await fetch("http://localhost:8080/CreateUsuario", {
+            body: JSON.stringify(usuario),
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => response.json())
+            .then((data) => { 
+                return data
+             })
+            .catch((err) => {
+                return err
+            })
+    }
+    async getUsuarioById(Id){
+        return await fetch(`http://localhost:8080/UsuarioGetById/${Id}`, {
+            method: "GET"
+        })
+        .then((response) =>  response.json())
+        .then((data) => { 
+            return data
+        });
+            
+    }
+    async deleteUsuarioById(Id){
+        return await fetch(`http://localhost:8080/DeleteById/${Id}`, {
+            method: "DELETE"
+        })
+        .then((response) =>  response.json())
+        .then((data) => { return data});
     }
 }

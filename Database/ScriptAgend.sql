@@ -1,37 +1,41 @@
--- Tabela Usuario
-CREATE TABLE Usuario (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    CPF VARCHAR(14) NOT NULL UNIQUE
+create database teste;
+use teste;
+create table datahora(
+Id int not null primary key auto_increment,
+Ano int not null,
+Mes int not null,
+Dia int not null,
+HoraInicial time not null,
+HoraFechamento time not null
 );
-
--- Tabela Academia
-CREATE TABLE Academia (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    CapacidadeUsuarios INT NOT NULL,
-    NomeComercial VARCHAR(255) NOT NULL,
-    Endereco VARCHAR(255) NOT NULL,
-    HorarioAbertura TIME NOT NULL,
-    HorarioFechamento TIME NOT NULL
+create table usuario(
+Id int not null primary key auto_increment,
+nome varchar(255) not null,
+CPF varchar(14) not null
 );
-
--- Tabela AcademiaUsuarios
-CREATE TABLE AcademiaUsuarios (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    AcademiaId INT,
-    UsuarioId INT,
-    FOREIGN KEY (AcademiaId) REFERENCES Academia(Id),
-    FOREIGN KEY (UsuarioId) REFERENCES Usuario(Id)
+create table academia(
+Id int not null primary key auto_increment,
+CapacidadeUsuarios int not null,
+NomeComercial varchar(255) not null,
+Endereco varchar(255) not null,
+HorarioAbertura time not null,
+HorarioFechamento time not null
 );
-
--- Tabela Agendamento
-CREATE TABLE Agendamento (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    AcademiaId INT,
-    UsuarioId INT,
-    Data DATE NOT NULL,
-    HorarioInicial TIME NOT NULL,
-    HorarioFinal TIME NOT NULL,
-    FOREIGN KEY (AcademiaId) REFERENCES Academia(Id),
-    FOREIGN KEY (UsuarioId) REFERENCES Usuario(Id)
+use teste;
+create table academiausuarios(
+Id int not null primary key auto_increment,
+AcademiaId int not null,
+UsuarioId int not null,
+foreign key(AcademiaId) references teste.academia(Id) on update cascade on delete cascade,
+foreign key(UsuarioId) references teste.usuario(Id) on update cascade on delete cascade
+);
+use teste;
+create table agendamento(
+Id int primary key auto_increment not null,
+AcademiaId int not null,
+UsuarioId int not null,
+DataHoraId int not null,
+foreign key(AcademiaId) references teste.academia(Id) on update cascade on delete cascade,
+foreign key(UsuarioId) references teste.usuario(Id) on update cascade on delete cascade,
+foreign key(DataHoraId) references teste.datahora(Id) on update cascade on delete cascade
 );

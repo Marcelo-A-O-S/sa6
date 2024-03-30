@@ -1,7 +1,7 @@
 export class ApiAcademias{
     async getAcademias(){
         let Academias;
-        Academias = await fetch("https://marcelo-a-o-s.github.io/sa6/assets/js/data/DataAcademias.json")
+        Academias = await fetch("http://localhost:8080/Academias")
         .then( (response) => {
             return response.json()
         })
@@ -16,4 +16,15 @@ export class ApiAcademias{
         })
         return Academia;
     }
+    async getAcademiaById(Id){
+        return await fetch(`http://localhost:8080/AcademiaGetById/${Id}`)
+        .then((response)=> response.json())
+        .then((data) => {return data})
+    }
+    async getAgendamentosByAcademiaId(academiaId){
+        return await fetch(`http://localhost:8080/GetAgendamentosByAcademiaId/${academiaId}`)
+        .then((response)=> response.json())
+        .then((data) => {return data})
+    }
+    
 }
