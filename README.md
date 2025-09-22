@@ -1,33 +1,82 @@
-# sa6
+# 🏋️‍♂️ SA6 – Golden House
 
-ETAPA 1: AGENDAMENTO DE HORÁRIOS DE ACADEMIAS
+## 📌 Etapa 1: Agendamento de Horários de Academias
 
-UMA BREVE INTRODUÇÃO(se quiser pode ignorar e ir direto para as especificação)
+### 👋 Introdução
 
-Seja Bem-Vindo a SA6, ou melhor, seja Bem-vindo a Golden House. Uma Aplicação desenvolvida pelos seguintes desenvolvedores: Marcelo A.(Product Owner), Henrique D.(Front-end), Samuel M.(Back-end), Rafael H(Banco de Dados), Gabriel I. do Brasil(Front-end).
+Seja bem-vindo à **SA6**, ou melhor, à **Golden House**.  
+Uma aplicação desenvolvida pelos seguintes integrantes:
 
-A Maneira que foi plenejado foi muito baseado nos modelos SCRUM de gerenciamento de Projeto, sendo realizadas reuniões diarias ao final do dia para olhar o que foi desenvolvido e o que deveriamos realizar no próximo passo.
+- **Marcelo A.** – Product Owner  
+- **Henrique D.** – Front-end  
+- **Samuel M.** – Back-end  
+- **Rafael H.** – Banco de Dados  
+- **Gabriel I. do Brasil** – Front-end  
 
-O Aplicação possui algo por volta entre 9 e 10 paginas, sendo  a utilização de APIs  um pilar essencial no nosso Projeto. Pois acreditamos através dessa ferramentas realizamos despoluição visual do sistema e reaproveitamento de código que vai permitir com que o site consiga responder as chamadas de forma mais rapida e eficiente, além de mehorar a priodutividade do dessenvolvedor estimulando a inovação ao fornecer acesso a funcionalidades e dados de outros sistema.
+O projeto foi planejado com base no **modelo SCRUM** de gerenciamento ágil, realizando **reuniões diárias** ao final do dia para revisar o que foi desenvolvido e definir os próximos passos.
 
-Utilizando o Modelo de Divisão Funcional de Bibliotecas permitiu que nós conseguissemos desenvolver o sistema de forma mais rapida e mais inteligente, pois além de facilitar a vizualização de comandos e chamadas do sistema, permitiu que as alterações ou correções podessem ser feitas em partes específicas do sistema sem afetar o restante do código. Isso tornou a manutenção mais simples e segura, pois reduz o risco de introduzir regressões ou efeitos colaterais
+A aplicação possui entre **9 e 10 páginas**, com uso intensivo de **APIs** como pilar central do projeto. Isso nos permitiu:
+- Melhorar a performance e reduzir a poluição visual do sistema.  
+- Reaproveitar código de forma inteligente.  
+- Aumentar a produtividade dos desenvolvedores.  
+- Estimular a inovação ao integrar dados e funcionalidades de outros sistemas.  
 
-Entre as linguagens de programação, a linguagem selecionada pelo nosso grupo foi o Rust, que junto com o python, vem tendo uma ascensão astronomica e que promete aos seus desenvolvedores ser a linguagem do futuro no mercado tecnologico. Sendo desenvolvida pela Mozilla Research ela foi projetada para ser segura, concorrente e prática. Dito isso, atendeu todas as nossa expectativas para a realização do back-end. Principalmente graças a sua Segurança de Memória, seu sistema de tipos  garante a segurança de memória em tempo de compilação, sem a necessidade de coleta de lixo. E além disso, Rust é uma linguagem de programação portável, com suporte para compilação cruzada em uma ampla gama de plataformas e arquiteturas. Sendo atraente para o desenvolvimento de software que precisa ser executado em diferentes sistemas operacionais e dispositivos.
+Além disso, adotamos o **Modelo de Divisão Funcional de Bibliotecas**, o que trouxe benefícios como:
+- Desenvolvimento mais rápido e inteligente.  
+- Melhor visualização de comandos e chamadas do sistema.  
+- Facilidade na manutenção, permitindo alterações pontuais sem comprometer o restante do código.  
+- Redução de riscos de regressões e efeitos colaterais.  
 
+### 🚀 Tecnologia Utilizada
 
-Feito uma breve introdução do processo de desenvolvimento da GOLDEN HOUSE. Veja abaixo suas Especificações.
+A linguagem escolhida para o **back-end** foi o **Rust**, que vem crescendo de forma exponencial e é considerada por muitos como a **linguagem do futuro**. Desenvolvida pela Mozilla Research, o Rust foi projetado para ser **seguro, concorrente e prático**.  
 
-------------------------//----------------------------------//
+Entre suas principais vantagens destacamos:
+- **Segurança de memória em tempo de compilação**, sem necessidade de garbage collector.  
+- **Portabilidade**, com suporte a compilação cruzada para múltiplas plataformas e arquiteturas.  
+- **Alto desempenho**, ideal para aplicações críticas e escaláveis.  
 
-ESPECIFICAÇÕES ETAPA 1
+Essas características atenderam plenamente às nossas expectativas para o desenvolvimento do back-end da Golden House.  
 
-Desenvolvedores do Projeto: Henrique D., Marcelo A., Samuel M., Rafael H, Gabriel I. do Brasil
-Linguagens de texto: HTML e CSS
-Linguagens de Programação: Javascript e Rust
-Banco de Dados: MySQL workbench
-Modelo de Geranciamento do Projeto: SCRUM
+---
 
-Código Fonte (Bliblioteca, Dependencias, APIs...): [text](https://github.com/192el/sa6.git)
+## 📑 Especificações – Etapa 1
+
+- **Desenvolvedores**: Henrique D., Marcelo A., Samuel M., Rafael H., Gabriel I. do Brasil  
+- **Linguagens de marcação e estilo**: HTML, CSS  
+- **Linguagens de programação**: JavaScript, Rust  
+- **Banco de Dados**: MySQL Workbench  
+- **Modelo de Gerenciamento do Projeto**: SCRUM  
+
+## 📦 Dependências do Projeto
+
+Este projeto utiliza as seguintes bibliotecas Rust:
+
+- **[chrono](https://crates.io/crates/chrono) `0.4.34`**  
+  Biblioteca para manipulação de datas e horários.  
+  - Features habilitadas: `serde` (para serialização/deserialização de datas).
+
+- **[actix-web](https://crates.io/crates/actix-web) `4`**  
+  Framework para construção de servidores web assíncronos e APIs REST.
+
+- **[diesel](https://crates.io/crates/diesel) `2.1.0`**  
+  ORM para Rust, facilita interação com bancos de dados relacionais.  
+  - Features habilitadas: `mysql`, `chrono`.
+
+- **[dotenvy](https://crates.io/crates/dotenvy) `0.15`**  
+  Carrega variáveis de ambiente a partir de arquivos `.env`.
+
+- **[serde](https://crates.io/crates/serde) `1.0.197`**  
+  Framework para serialização e deserialização de dados em vários formatos (ex: JSON).
+
+- **[mysql](https://crates.io/crates/mysql) `24.0.0`**  
+  Cliente para conexão direta com bancos de dados MySQL.
+
+- **[actix-rt](https://crates.io/crates/actix-rt) `2.9.0`**  
+  Runtime assíncrono utilizado pelo Actix para execução de tarefas.
+
+- **[actix-cors](https://crates.io/crates/actix-cors) `0.7.0`**  
+  Middleware para habilitar e configurar **CORS** em aplicações Actix-Web.
 
 Front-end: [text](https://github.com/192el/sa6/tree/main/Frontend)
 
