@@ -78,11 +78,28 @@ Este projeto utiliza as seguintes bibliotecas Rust:
 - **[actix-cors](https://crates.io/crates/actix-cors) `0.7.0`**  
   Middleware para habilitar e configurar **CORS** em aplicações Actix-Web.
 
-Front-end: [text](https://github.com/192el/sa6/tree/main/Frontend)
+## 🖥️ Estrutura do Projeto
 
-Back-end: [text](https://github.com/192el/sa6/tree/main/Backend)
+### 🎨 Front-end
+O **front-end** foi desenvolvido com **HTML, CSS e JavaScript**, garantindo uma interface intuitiva e responsiva para o usuário.  
+- Responsável pela **experiência do usuário** e interação com o sistema.  
+- Conecta-se ao back-end via **APIs REST**.  
+- Organizado em páginas que simulam o fluxo real de agendamento em academias.  
+🔗 [Acesse o código do Front-end](https://github.com/Marcelo-A-O-S/sa6/tree/main/Frontend)
 
-Banco de Dados:[text](https://github.com/192el/sa6/tree/main/Database)
+### ⚙️ Back-end
+O **back-end** foi construído em **Rust** utilizando o **framework Actix-Web**.  
+- Responsável pela **lógica de negócio** e processamento das requisições.  
+- Implementa autenticação, gerenciamento de agendamentos e integração com o banco de dados.  
+- Utiliza **Diesel ORM** para mapear entidades e executar queries no MySQL.  
+🔗 [Acesse o código do Back-end](https://github.com/Marcelo-A-O-S/sa6/tree/main/Backend)
+
+### 🗄️ Banco de Dados
+O **banco de dados** foi modelado no **MySQL Workbench**.  
+- Armazena informações sobre usuários, horários, academias e reservas.  
+- Estrutura relacional que garante consistência e integridade dos dados.  
+- Integração feita via Diesel ORM no back-end.  
+🔗 [Acesse o modelo do Banco de Dados](https://github.com/Marcelo-A-O-S/sa6/tree/main/Database)
 
 Link do Vídeo:  
 
